@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".TaskDetailsFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:orientation="horizontal"
+            android:layout_margin="8dp"
+            android:padding="8dp">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/edit_task_img"
+                android:src="@drawable/ic_baseline_edit_24"/>
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/delete_task_img"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/ic_baseline_delete_24"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Task Title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/deadline_textview"
+            android:id="@+id/task_title"
+            android:layout_marginTop="150dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="15/11/2021"
+            android:id="@+id/deadline_textview"
+            app:layout_constraintStart_toEndOf="@+id/task_title"
+            app:layout_constraintTop_toTopOf="@+id/task_title"
+            app:layout_constraintBottom_toBottomOf="@+id/task_title"
+            app:layout_constraintEnd_toEndOf="parent"/>
+        <View
+            android:id="@+id/divider"
+            style="?attr/dividerHorizontal"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/deadline_textview"
+            app:layout_constraintStart_toStartOf="@+id/task_title"
+            app:layout_constraintTop_toBottomOf="@id/task_title" />
+        <ScrollView
+            android:layout_width="270dp"
+            android:layout_height="130dp"
+            android:id="@+id/scroll_subtask_list"
+            android:orientation="vertical"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="16dp">
+
+            <!--            <TextView-->
+<!--                android:layout_width="270dp"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:text="list of subtask" />-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <CheckedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="First subtask"
+                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                    android:gravity="center"
+                    android:checked="true"
+                    />
+                <CheckedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Second subtask"
+                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                    android:gravity="center"
+                    android:checked="false"
+                    />
+                <CheckedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Third subtask"
+                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                    android:gravity="center"
+                    android:checked="false"
+                    />
+                <CheckedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Forth subtask"
+                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                    android:gravity="center"
+                    android:checked="false"
+                    />
+                <CheckedTextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Fifth subtask"
+                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                    android:gravity="center"
+                    android:checked="false"
+                    />
+            </LinearLayout>
+
+        </ScrollView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Priority"
+            android:id="@+id/priority_textview"
+            app:layout_constraintTop_toBottomOf="@+id/scroll_subtask_list"
+            app:layout_constraintStart_toStartOf="@+id/scroll_subtask_list"
+            android:layout_marginTop="16dp"/>
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:backgroundTint="@color/priority_high"
+            app:layout_constraintStart_toEndOf="@+id/priority_textview"
+            app:layout_constraintTop_toTopOf="@+id/priority_textview"
+            app:layout_constraintBottom_toBottomOf="@+id/priority_textview"
+            android:id="@+id/priority_color_btn"
+            android:layout_marginStart="8dp"/>
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</FrameLayout>
