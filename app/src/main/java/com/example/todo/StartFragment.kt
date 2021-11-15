@@ -35,4 +35,7 @@ class StartFragment : Fragment() {
         super.onDestroy()
         binding = null
     }
+
+    fun goToNextFragment() {
+    }
 }

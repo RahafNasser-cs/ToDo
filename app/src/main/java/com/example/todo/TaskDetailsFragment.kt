@@ -23,11 +23,14 @@ class TaskDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding!!.apply {  }
+        binding!!.apply { }
     }
 
     override fun onDestroy() {
         super.onDestroy()
         binding = null
+    }
+
+    fun goToNextFragment() {
     }
 }
