@@ -43,6 +43,7 @@ class StartFragment : Fragment() {
     }
 
     fun goToNextFragment() {
+        sharedViewModel.restart()
         findNavController().navigate(R.id.action_startFragment_to_newTaskFragment)
     }
 

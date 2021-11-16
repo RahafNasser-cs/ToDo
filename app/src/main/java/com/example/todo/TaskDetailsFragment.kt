@@ -36,4 +36,7 @@ class TaskDetailsFragment : Fragment() {
 
     fun goToNextFragment() {
     }
+    fun deleteTask() {
+
+    }
 }

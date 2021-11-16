@@ -44,10 +44,12 @@ class NewTaskFragment : Fragment() {
     }
 
     fun goToNextFragment() {
+        sharedViewModel.taskCreationDate()
+        sharedViewModel.addNewTaskInfo()
         findNavController().navigate(R.id.action_newTaskFragment_to_startFragment)
     }
     fun pickDate() {
-        sharedViewModel.showDatePicker(requireFragmentManager())
+        sharedViewModel.showDatePicker(requireFragmentManager(), requireContext())
     }
 
 }
