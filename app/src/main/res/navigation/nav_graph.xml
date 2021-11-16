@@ -26,5 +26,9 @@
         android:id="@+id/newTaskFragment"
         android:name="com.example.todo.NewTaskFragment"
         android:label="fragment_new_task"
-        tools:layout="@layout/fragment_new_task" />
+        tools:layout="@layout/fragment_new_task" >
+        <action
+            android:id="@+id/action_newTaskFragment_to_startFragment"
+            app:destination="@id/startFragment" />
+    </fragment>
 </navigation>

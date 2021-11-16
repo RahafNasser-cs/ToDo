@@ -23,7 +23,10 @@ class TaskDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding!!.apply { }
+        binding!!.apply {
+            viewModel = sharedViewModel
+            lifecycleOwner = viewLifecycleOwner
+        }
     }
 
     override fun onDestroy() {
