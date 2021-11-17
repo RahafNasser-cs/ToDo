@@ -4,44 +4,45 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:backgroundTint="@color/white_dark"
-    android:layout_margin="16dp">
-<androidx.constraintlayout.widget.ConstraintLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_marginTop="10dp"
-    android:layout_marginBottom="10dp">
-    <ImageButton
-        android:layout_width="35dp"
-        android:layout_height="35dp"
-        android:backgroundTint="@color/priority_high"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:id="@+id/priority_color"
-        android:layout_marginTop="8dp"
-        android:layout_marginStart="8dp"/>
+    android:layout_margin="8dp"
+    android:id="@+id/task_card">
 
-    <TextView
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/task_textview"
-        android:text="Workout"
-        android:gravity="center"
-        android:layout_marginStart="8dp"
-        app:layout_constraintStart_toEndOf="@+id/priority_color"
-        app:layout_constraintTop_toTopOf="@+id/priority_color"
-        app:layout_constraintBottom_toBottomOf="@+id/priority_color"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:backgroundTint="@color/priority_low"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:id="@+id/priority_color"
+            android:layout_marginStart="8dp"
+            />
 
+        <TextView
+            android:layout_width="220dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/task_title_textview"
+            android:text="Workout"
+            android:gravity="center"
+            android:layout_marginStart="8dp"
+            app:layout_constraintStart_toEndOf="@+id/priority_color"
+            app:layout_constraintTop_toTopOf="@+id/priority_color"
+            app:layout_constraintBottom_toBottomOf="@+id/priority_color"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="14/11/2021"
+            android:id="@+id/task_date_textview"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/task_title_textview"
+            app:layout_constraintBottom_toBottomOf="@+id/task_title_textview"
+            android:layout_marginEnd="8dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="14/11/2021"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/task_textview"
-        app:layout_constraintBottom_toBottomOf="@+id/task_textview"
-        android:layout_marginEnd="8dp"/>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.cardview.widget.CardView>

@@ -1,152 +1,232 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     tools:context=".TaskDetailsFragment">
+
     <data>
+
         <variable
             name="viewModel"
             type="com.example.todo.model.TaskViewModel" />
+
         <variable
             name="taskDetailsFragment"
             type="com.example.todo.TaskDetailsFragment" />
     </data>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:orientation="horizontal"
-            android:layout_margin="8dp"
-            android:padding="8dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:id="@+id/edit_task_img"
-                android:src="@drawable/ic_baseline_edit_24"/>
-            <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:onClick="@{()-> taskDetailsFragment.editTask()}"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:layout_constraintBottom_toBottomOf="@+id/delete_task_img"
+                app:layout_constraintEnd_toStartOf="@+id/delete_task_img"
+                app:layout_constraintTop_toTopOf="@+id/delete_task_img" />
+
+            <ImageView
                 android:id="@+id/delete_task_img"
-                android:layout_marginStart="8dp"
-                android:src="@drawable/ic_baseline_delete_24"/>
-        </LinearLayout>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Task Title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/deadline_textview"
-            android:id="@+id/task_title"
-            android:layout_marginTop="150dp"
-            />
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="15/11/2021"
-            android:id="@+id/deadline_textview"
-            app:layout_constraintStart_toEndOf="@+id/task_title"
-            app:layout_constraintTop_toTopOf="@+id/task_title"
-            app:layout_constraintBottom_toBottomOf="@+id/task_title"
-            app:layout_constraintEnd_toEndOf="parent"/>
-        <View
-            android:id="@+id/divider"
-            style="?attr/dividerHorizontal"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/deadline_textview"
-            app:layout_constraintStart_toStartOf="@+id/task_title"
-            app:layout_constraintTop_toBottomOf="@id/task_title" />
-        <ScrollView
-            android:layout_width="270dp"
-            android:layout_height="130dp"
-            android:id="@+id/scroll_subtask_list"
-            android:orientation="vertical"
-            app:layout_constraintTop_toBottomOf="@id/divider"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="16dp">
-
-            <!--            <TextView-->
-<!--                android:layout_width="270dp"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="list of subtask" />-->
-            <LinearLayout
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <CheckedTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="First subtask"
-                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                    android:gravity="center"
-                    android:checked="true"
-                    />
-                <CheckedTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Second subtask"
-                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                    android:gravity="center"
-                    android:checked="false"
-                    />
-                <CheckedTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Third subtask"
-                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                    android:gravity="center"
-                    android:checked="false"
-                    />
-                <CheckedTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Forth subtask"
-                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                    android:gravity="center"
-                    android:checked="false"
-                    />
-                <CheckedTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Fifth subtask"
-                    android:checkMark="?android:attr/listChoiceIndicatorMultiple"
-                    android:gravity="center"
-                    android:checked="false"
-                    />
-            </LinearLayout>
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{()-> taskDetailsFragment.dialogConfirmDeleteTask()}"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        </ScrollView>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Priority"
-            android:id="@+id/priority_textview"
-            app:layout_constraintTop_toBottomOf="@+id/scroll_subtask_list"
-            app:layout_constraintStart_toStartOf="@+id/scroll_subtask_list"
-            android:layout_marginTop="16dp"/>
-        <ImageButton
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:backgroundTint="@color/priority_high"
-            app:layout_constraintStart_toEndOf="@+id/priority_textview"
-            app:layout_constraintTop_toTopOf="@+id/priority_textview"
-            app:layout_constraintBottom_toBottomOf="@+id/priority_textview"
-            android:id="@+id/priority_color_btn"
-            android:layout_marginStart="8dp"/>
+            <TextView
+                android:id="@+id/task_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="70dp"
+                android:text="Task Title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
+            <TextView
+                android:id="@+id/task_title_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="50dp"
+                android:text="@={viewModel.title}"
+                app:layout_constraintBottom_toBottomOf="@+id/task_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/task_title" />
 
+            <View
+                android:id="@+id/divider"
+                style="?attr/dividerHorizontal"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/task_title_content"
+                app:layout_constraintStart_toStartOf="@+id/task_title"
+                app:layout_constraintTop_toBottomOf="@id/task_title" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/date_creation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Date creation"
+                app:layout_constraintStart_toStartOf="@+id/task_title"
+                app:layout_constraintTop_toBottomOf="@+id/task_title" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/date_creation_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@={viewModel.creationDate}"
+                app:layout_constraintEnd_toEndOf="@+id/task_title_content"
+                app:layout_constraintTop_toBottomOf="@+id/task_title_content" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/deadline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Deadline"
+                app:layout_constraintStart_toStartOf="@+id/date_creation"
+                app:layout_constraintTop_toBottomOf="@+id/date_creation" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/deadline_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@={viewModel.date}"
+                app:layout_constraintEnd_toEndOf="@+id/date_creation_content"
+                app:layout_constraintTop_toBottomOf="@+id/date_creation_content" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/subtask"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Subtask"
+                app:layout_constraintStart_toStartOf="@+id/deadline"
+                app:layout_constraintTop_toBottomOf="@+id/deadline" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/subtask_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="@={viewModel.subTask}"
+                app:layout_constraintEnd_toEndOf="@+id/deadline_content"
+                app:layout_constraintTop_toBottomOf="@+id/deadline_content" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/priority"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:text="Priority"
+                app:layout_constraintStart_toStartOf="@+id/subtask"
+                app:layout_constraintTop_toBottomOf="@+id/subtask" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/priority_content"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="@color/priority_low"
+                app:layout_constraintBottom_toBottomOf="@+id/priority"
+                app:layout_constraintEnd_toEndOf="@+id/subtask_content"
+                app:layout_constraintTop_toTopOf="@+id/priority" />
+            <!--            <ScrollView-->
+            <!--                android:layout_width="270dp"-->
+            <!--                android:layout_height="130dp"-->
+            <!--                android:id="@+id/scroll_subtask_list"-->
+            <!--                android:orientation="vertical"-->
+            <!--                app:layout_constraintTop_toBottomOf="@id/divider"-->
+            <!--                app:layout_constraintStart_toStartOf="parent"-->
+            <!--                app:layout_constraintEnd_toEndOf="parent"-->
+            <!--                android:layout_marginTop="16dp">-->
+
+            <!--                &lt;!&ndash;            <TextView&ndash;&gt;-->
+            <!--                &lt;!&ndash;                android:layout_width="270dp"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                android:layout_height="wrap_content"&ndash;&gt;-->
+            <!--                &lt;!&ndash;                android:text="list of subtask" />&ndash;&gt;-->
+            <!--                <LinearLayout-->
+            <!--                    android:layout_width="match_parent"-->
+            <!--                    android:layout_height="wrap_content"-->
+            <!--                    android:orientation="vertical">-->
+            <!--                    <CheckedTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="@{}"-->
+            <!--                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:checked="true"-->
+            <!--                        />-->
+            <!--                    <CheckedTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Second subtask"-->
+            <!--                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:checked="false"-->
+            <!--                        />-->
+            <!--                    <CheckedTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Third subtask"-->
+            <!--                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:checked="false"-->
+            <!--                        />-->
+            <!--                    <CheckedTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Forth subtask"-->
+            <!--                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:checked="false"-->
+            <!--                        />-->
+            <!--                    <CheckedTextView-->
+            <!--                        android:layout_width="match_parent"-->
+            <!--                        android:layout_height="wrap_content"-->
+            <!--                        android:text="Fifth subtask"-->
+            <!--                        android:checkMark="?android:attr/listChoiceIndicatorMultiple"-->
+            <!--                        android:gravity="center"-->
+            <!--                        android:checked="false"-->
+            <!--                        />-->
+            <!--                </LinearLayout>-->
+
+            <!--            </ScrollView>-->
+            <!--            <TextView-->
+            <!--                android:layout_width="wrap_content"-->
+            <!--                android:layout_height="wrap_content"-->
+            <!--                android:text="Priority"-->
+            <!--                android:id="@+id/priority_textview"-->
+            <!--                app:layout_constraintTop_toBottomOf="@+id/scroll_subtask_list"-->
+            <!--                app:layout_constraintStart_toStartOf="@+id/scroll_subtask_list"-->
+            <!--                android:layout_marginTop="16dp"/>-->
+            <!--            <ImageButton-->
+            <!--                android:id="@+id/priority_color_btn"-->
+            <!--                android:layout_width="48dp"-->
+            <!--                android:layout_height="48dp"-->
+            <!--                android:layout_marginStart="8dp"-->
+            <!--                android:backgroundTint="@color/priority_high"-->
+            <!--                app:layout_constraintBottom_toBottomOf="@+id/priority_textview"-->
+            <!--                app:layout_constraintStart_toEndOf="@+id/priority_textview"-->
+            <!--                app:layout_constraintTop_toTopOf="@+id/priority_textview" />-->
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 
 </layout>
