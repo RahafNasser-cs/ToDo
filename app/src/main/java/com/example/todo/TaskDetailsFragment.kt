@@ -53,23 +53,27 @@ class TaskDetailsFragment : Fragment() {
 
     fun goToNextFragment() {
     }
+
     fun dialogConfirmDeleteTask() {
         Toast.makeText(requireContext(), "Task not deleted", Toast.LENGTH_LONG).show()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Confirm")
             .setMessage("Are you sure to delete this task?")
-            .setNegativeButton("Cancel"){_,_ ->
+            .setNegativeButton("Cancel") { _, _ ->
                 Toast.makeText(requireContext(), "Task not deleted", Toast.LENGTH_LONG).show()
             }
-            .setPositiveButton("Delete"){_,_->
+            .setPositiveButton("Delete") { _, _ ->
                 deleteTask()
             }.show()
     }
+
     fun popupDeleteWindow() {
         val popupView = LayoutInflater.from(activity).inflate(R.layout.popup_delete, null)
         // Initialize a new instance of popup window
-        popupWindow = PopupWindow(popupView,
-            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT)
+        popupWindow = PopupWindow(
+            popupView,
+            LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT
+        )
         // Set an elevation for the popup window
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             popupWindow.elevation = 10.0F
@@ -80,8 +84,10 @@ class TaskDetailsFragment : Fragment() {
             requireView(), // Location to display popup window
             Gravity.CENTER, // Exact position of layout to display popup
             0, // X offset
-            0 )// Y offset
+            0
+        )// Y offset
     }
+
     fun cancelDeleteTask() {
 //        // Set a dismiss listener for popup window
 ////        popupWindow.setOnDismissListener {
@@ -92,25 +98,23 @@ class TaskDetailsFragment : Fragment() {
 
     fun deleteTask() {
         //sharedViewModel.deleteTaskFromLists()
-        Toast.makeText(requireContext(),"Task deleted",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
     }
+
     fun taskIsExpiredDate() {
-        val date = Calendar.getInstance().time
-        val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
-var a = sharedViewModel.date.value!!.toString() < sdf.format(date).toString()
-        Log.e("TAG", "taskIsExpiredDate: ${sharedViewModel.date.value!!.toString() } -- ${sdf.format(date).toString()}  $a", )
-        if (sharedViewModel.date.value!!.toString() < sdf.format(date).toString()) {
+        if (sharedViewModel.date.value!!.toString() < SimpleDateFormat(
+                "dd-MM-yyy",
+                Locale.UK
+            ).format(Calendar.getInstance().time).toString()
+        ) {
             MaterialAlertDialogBuilder(requireContext())
                 .setTitle("Expired date!")
                 .setMessage("your task date has expired")
-                .setPositiveButton("Ok"){_,_ ->
-                    Toast.makeText(requireContext(),"show msg expired date",Toast.LENGTH_LONG).show()
-                }.show()
-        }else {
-            Toast.makeText(requireContext(),"show msg not expired date",Toast.LENGTH_LONG).show()
+                .setPositiveButton("Ok") { _, _ -> }.show()
         }
     }
+
     fun editTask() {
-        Toast.makeText(requireContext(),"Edit task",Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), "Edit task", Toast.LENGTH_SHORT).show()
     }
 }
