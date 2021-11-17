@@ -138,7 +138,8 @@
                 android:layout_marginStart="45dp"
                 android:layout_marginTop="16dp"
                 android:text="@={viewModel.subTask}"
-                android:checked="true"
+                android:checked="false"
+                android:onClick="@{()-> taskDetailsFragment.subtaskChecked()}"
                 android:checkMark="?android:attr/listChoiceIndicatorMultiple"
                 app:layout_constraintStart_toEndOf="@+id/subtask"
                 app:layout_constraintTop_toBottomOf="@+id/priority_content"/>

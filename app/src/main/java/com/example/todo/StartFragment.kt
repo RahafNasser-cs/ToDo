@@ -38,6 +38,7 @@ class StartFragment : Fragment() {
             }
             recyclerView.setHasFixedSize(true)
         }
+        sharedViewModel.testing()
     }
     override fun onDestroy() {
         super.onDestroy()

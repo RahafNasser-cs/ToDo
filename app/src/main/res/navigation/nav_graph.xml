@@ -16,6 +16,21 @@
         <action
             android:id="@+id/action_startFragment_to_newTaskFragment"
             app:destination="@id/newTaskFragment" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="subtask"
+            app:argType="string" />
+        <argument
+            android:name="priority"
+            app:argType="string" />
+        <argument
+            android:name="taskStatus"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/taskDetailsFragment"

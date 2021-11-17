@@ -44,12 +44,42 @@ class NewTaskFragment : Fragment() {
     }
 
     fun goToNextFragment() {
-        sharedViewModel.taskCreationDate()
-        sharedViewModel.addNewTaskInfo()
-        findNavController().navigate(R.id.action_newTaskFragment_to_startFragment)
+        if (TaskContentIsValid()) {
+            sharedViewModel.taskCreationDate()
+            sharedViewModel.addNewTaskInfo()
+            findNavController().navigate(R.id.action_newTaskFragment_to_startFragment)
+        }
     }
+
     fun pickDate() {
         sharedViewModel.showDatePicker(requireFragmentManager(), requireContext())
+    }
+
+    fun TaskContentIsValid(): Boolean {
+        return if (!titleIsValid()) {
+            Toast.makeText(requireContext(), "Enter a title", Toast.LENGTH_SHORT).show()
+            false
+        } else if (!dateIsValid()) {
+            Toast.makeText(requireContext(), "Choose a date", Toast.LENGTH_SHORT).show()
+            false
+        } else if (!subtaskIsValid()) {
+            Toast.makeText(requireContext(), "Enter a subtask", Toast.LENGTH_SHORT).show()
+            false
+        } else {
+            true
+        }
+    }
+
+    fun titleIsValid(): Boolean {
+        return binding!!.taskTitleEditText.text.toString() != ""
+    }
+
+    fun dateIsValid(): Boolean {
+        return binding!!.dateEditText.text.toString() != ""
+    }
+
+    fun subtaskIsValid(): Boolean {
+        return binding!!.subtaskEditText.text.toString() != ""
     }
 
 }

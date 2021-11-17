@@ -33,12 +33,12 @@ class TaskViewModel : ViewModel() {
     private var _creationDate = MutableLiveData<String>()
     val creationDate: MutableLiveData<String>
         get() = _creationDate
+    private var _today = MutableLiveData<String>()
+    val today: MutableLiveData<String> get() = _today
     val priorityOptions = listOf("High", "Medium", "Low")
     val completionOptions = listOf("Complete", "Incomplete")
     val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
-
-    private var _today = MutableLiveData<String>()
-    val today: MutableLiveData<String> get() = _today
+    private var numberOfTaskChecked = 0
 
 
     init {
@@ -158,7 +158,7 @@ class TaskViewModel : ViewModel() {
         Log.d("priority list", "${listOfTaskPriority}")
         Log.d("completion list", "${listOfTaskStatus}")
     }
-
+    //To set priority color
     fun backgroundTintColor(priority: String): Int {
         return when (priority) {
             "High" -> {
@@ -170,6 +170,19 @@ class TaskViewModel : ViewModel() {
             else -> {
                 R.color.priority_low
             }
+        }
+    }
+    //To count number of subtask is checked
+    fun numberOfSubtaskChecked() {
+        numberOfTaskChecked++
+        checkTaskIsComplete(numberOfTaskChecked)
+    }
+    //To change task status to complete
+    fun checkTaskIsComplete(checkedNumber: Int) {
+        if (checkedNumber == 1) {
+            _taskStatus.value = completionOptions[0]
+            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+            listOfTaskStatus[index] = completionOptions[0]
         }
     }
 }

@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -44,6 +45,17 @@ class TaskDetailsFragment : Fragment() {
             taskStatus = it.getString(TASKSTATUS).toString()
             taskCreationDate = it.getString(CREATIONDATE).toString()
         }
+        // This callback will only be called when MyFragment is at least Started.
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val action = TaskDetailsFragmentDirections.actionTaskDetailsFragmentToStartFragment(
+                sharedViewModel.title.value.toString(),
+                sharedViewModel.date.value.toString(),
+                sharedViewModel.subTask.value.toString(),
+                sharedViewModel.priority.value.toString(),
+                sharedViewModel.taskStatus.value.toString()
+            )
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(
@@ -68,7 +80,13 @@ class TaskDetailsFragment : Fragment() {
         sharedViewModel.priority.value = priority
         sharedViewModel.taskStatus.value = taskStatus
         sharedViewModel.creationDate.value = taskCreationDate
-        binding!!.priorityContent.setBackgroundColor(resources.getColor(sharedViewModel.backgroundTintColor(sharedViewModel.priority.value.toString())))
+        binding!!.priorityContent.setBackgroundColor(
+            resources.getColor(
+                sharedViewModel.backgroundTintColor(
+                    sharedViewModel.priority.value.toString()
+                )
+            )
+        )
         taskIsExpiredDate()
     }
 
@@ -121,7 +139,12 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun deleteTask() {
-        sharedViewModel.deleteTaskFromLists(sharedViewModel.findTaskIndexByTitle(sharedViewModel.title.value.toString(),listOfTaskTitle))
+        sharedViewModel.deleteTaskFromLists(
+            sharedViewModel.findTaskIndexByTitle(
+                sharedViewModel.title.value.toString(),
+                listOfTaskTitle
+            )
+        )
         findNavController().navigate(R.id.action_taskDetailsFragment_to_startFragment)
         Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
     }
@@ -143,6 +166,13 @@ class TaskDetailsFragment : Fragment() {
         sharedViewModel.testing()
         findNavController().navigate(R.id.action_taskDetailsFragment_to_editTaskFragment)
         Toast.makeText(requireContext(), "Edit task", Toast.LENGTH_SHORT).show()
+    }
+
+    fun subtaskChecked() {
+        if (!binding!!.subtaskContent.isChecked) {
+            binding!!.subtaskContent.setCheckMarkDrawable(R.drawable.ic_baseline_check_24)
+            sharedViewModel.numberOfSubtaskChecked()
+        }
     }
 
     companion object {
