@@ -15,6 +15,7 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
 import com.example.todo.data.listOfTaskTitle
 import com.example.todo.databinding.FragmentTaskDetailsBinding
 import com.example.todo.model.TaskViewModel
@@ -67,6 +68,7 @@ class TaskDetailsFragment : Fragment() {
         sharedViewModel.priority.value = priority
         sharedViewModel.taskStatus.value = taskStatus
         sharedViewModel.creationDate.value = taskCreationDate
+        binding!!.priorityContent.setBackgroundColor(resources.getColor(sharedViewModel.backgroundTintColor(sharedViewModel.priority.value.toString())))
         taskIsExpiredDate()
     }
 
@@ -119,7 +121,8 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun deleteTask() {
-        sharedViewModel.deleteTaskFromLists()
+        sharedViewModel.deleteTaskFromLists(sharedViewModel.findTaskIndexByTitle(sharedViewModel.title.value.toString(),listOfTaskTitle))
+        findNavController().navigate(R.id.action_taskDetailsFragment_to_startFragment)
         Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
     }
 
@@ -137,6 +140,8 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun editTask() {
+        sharedViewModel.testing()
+        findNavController().navigate(R.id.action_taskDetailsFragment_to_editTaskFragment)
         Toast.makeText(requireContext(), "Edit task", Toast.LENGTH_SHORT).show()
     }
 

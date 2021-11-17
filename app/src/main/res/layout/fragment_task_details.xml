@@ -21,7 +21,8 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
             <ImageView
                 android:id="@+id/edit_task_img"
@@ -45,43 +46,36 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/task_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
-                android:layout_marginTop="70dp"
+                android:layout_marginTop="150dp"
                 android:text="Task Title"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
+            <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/task_title_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="50dp"
                 android:text="@={viewModel.title}"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="@+id/task_title"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/task_title" />
 
-            <View
-                android:id="@+id/divider"
-                style="?attr/dividerHorizontal"
-                android:layout_width="0dp"
-                android:layout_height="1dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
-                app:layout_constraintEnd_toEndOf="@+id/task_title_content"
-                app:layout_constraintStart_toStartOf="@+id/task_title"
-                app:layout_constraintTop_toBottomOf="@id/task_title" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/date_creation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
                 android:text="Date creation"
+                android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/task_title"
                 app:layout_constraintTop_toBottomOf="@+id/task_title" />
 
@@ -89,65 +83,104 @@
                 android:id="@+id/date_creation_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="15dp"
+                android:textStyle="bold"
                 android:text="@={viewModel.creationDate}"
                 app:layout_constraintEnd_toEndOf="@+id/task_title_content"
                 app:layout_constraintTop_toBottomOf="@+id/task_title_content" />
+            <View
+                android:id="@+id/divider"
+                style="@style/Widget.ToDo.Divider"
+                android:layout_width="270dp"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintEnd_toEndOf="@+id/date_creation_content"
+                app:layout_constraintStart_toStartOf="@+id/date_creation"
+                app:layout_constraintTop_toBottomOf="@id/date_creation"
+                />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:layout_marginStart="50dp"
                 android:text="Deadline"
-                app:layout_constraintStart_toStartOf="@+id/date_creation"
-                app:layout_constraintTop_toBottomOf="@+id/date_creation" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/deadline_content"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
+                android:layout_marginStart="40dp"
                 android:text="@={viewModel.date}"
-                app:layout_constraintEnd_toEndOf="@+id/date_creation_content"
-                app:layout_constraintTop_toBottomOf="@+id/date_creation_content" />
+                app:layout_constraintStart_toEndOf="@+id/deadline"
+                app:layout_constraintTop_toBottomOf="@+id/divider" />
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/subtask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="40dp"
                 android:text="Subtask"
-                app:layout_constraintStart_toStartOf="@+id/deadline"
-                app:layout_constraintTop_toBottomOf="@+id/deadline" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/priority"
+                app:layout_constraintTop_toBottomOf="@+id/priority" />
 
-            <com.google.android.material.textview.MaterialTextView
+            <CheckedTextView
                 android:id="@+id/subtask_content"
-                android:layout_width="wrap_content"
+                android:layout_width="200dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginStart="45dp"
+                android:layout_marginTop="16dp"
                 android:text="@={viewModel.subTask}"
-                app:layout_constraintEnd_toEndOf="@+id/deadline_content"
-                app:layout_constraintTop_toBottomOf="@+id/deadline_content" />
+                android:checked="true"
+                android:checkMark="?android:attr/listChoiceIndicatorMultiple"
+                app:layout_constraintStart_toEndOf="@+id/subtask"
+                app:layout_constraintTop_toBottomOf="@+id/priority_content"/>
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/priority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="40dp"
                 android:text="Priority"
-                app:layout_constraintStart_toStartOf="@+id/subtask"
-                app:layout_constraintTop_toBottomOf="@+id/subtask" />
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/deadline"
+                app:layout_constraintTop_toBottomOf="@+id/deadline" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/priority_content"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
-                android:layout_marginTop="10dp"
-                android:backgroundTint="@color/priority_low"
-                app:layout_constraintBottom_toBottomOf="@+id/priority"
-                app:layout_constraintEnd_toEndOf="@+id/subtask_content"
-                app:layout_constraintTop_toTopOf="@+id/priority" />
+                android:layout_marginTop="28dp"
+                android:layout_marginStart="47dp"
+                app:layout_constraintStart_toEndOf="@id/priority"
+                app:layout_constraintTop_toBottomOf="@+id/deadline_content" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/task_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:text="Task State"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="@+id/subtask"
+                app:layout_constraintTop_toBottomOf="@+id/subtask" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/task_status_content"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginTop="40dp"
+                android:text="@={viewModel.taskStatus}"
+                app:layout_constraintStart_toEndOf="@+id/task_status"
+                app:layout_constraintTop_toBottomOf="@+id/subtask_content"
+                />
+
             <!--            <ScrollView-->
             <!--                android:layout_width="270dp"-->
             <!--                android:layout_height="130dp"-->

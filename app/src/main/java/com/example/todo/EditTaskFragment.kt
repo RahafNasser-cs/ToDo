@@ -5,55 +5,56 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.fragment.app.activityViewModels
+import androidx.navigation.fragment.findNavController
+import com.example.todo.data.listOfTaskTitle
+import com.example.todo.databinding.FragmentEditTaskBinding
+import com.example.todo.model.TaskViewModel
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [EditTaskFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class EditTaskFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var binding: FragmentEditTaskBinding? = null
+    private val sharedViewModel: TaskViewModel by activityViewModels()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentEditTaskBinding.inflate(inflater, container, false)
+        return binding!!.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding?.apply {
+            lifecycleOwner = viewLifecycleOwner
+            viewModel = sharedViewModel
+            editTaskFragment = this@EditTaskFragment
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_edit_task, container, false)
+    override fun onDestroy() {
+        super.onDestroy()
+        binding = null
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment EditTaskFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            EditTaskFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    fun pickDate() {
+        sharedViewModel.showDatePicker(requireFragmentManager(), requireContext())
+    }
+
+    fun goToNextFragment() {
+        sharedViewModel.updateTaskInLists(sharedViewModel.findTaskIndexByTitle(sharedViewModel.title.toString(), listOfTaskTitle))
+        val action = EditTaskFragmentDirections.actionEditTaskFragmentToTaskDetailsFragment(
+            sharedViewModel.title.value.toString(),
+            sharedViewModel.date.value.toString(),
+            sharedViewModel.subTask.value.toString(),
+            sharedViewModel.priority.value.toString(),
+            sharedViewModel.taskStatus.value.toString(),
+            sharedViewModel.creationDate.value.toString()
+        )
+        sharedViewModel.testing()
+        Toast.makeText(requireContext(), "Changes saved", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(action)
     }
 }

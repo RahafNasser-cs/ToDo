@@ -207,7 +207,7 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Done"
+            android:text="Add Task"
             android:onClick="@{()-> newTaskFragment.goToNextFragment()}"
             android:id="@+id/done_btn"
             app:layout_constraintBottom_toBottomOf="parent"
