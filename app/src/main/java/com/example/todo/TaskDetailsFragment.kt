@@ -55,13 +55,10 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun dialogConfirmDeleteTask() {
-        Toast.makeText(requireContext(), "Task not deleted", Toast.LENGTH_LONG).show()
         MaterialAlertDialogBuilder(requireContext())
             .setTitle("Confirm")
             .setMessage("Are you sure to delete this task?")
-            .setNegativeButton("Cancel") { _, _ ->
-                Toast.makeText(requireContext(), "Task not deleted", Toast.LENGTH_LONG).show()
-            }
+            .setNegativeButton("Cancel") { _, _ -> }
             .setPositiveButton("Delete") { _, _ ->
                 deleteTask()
             }.show()
