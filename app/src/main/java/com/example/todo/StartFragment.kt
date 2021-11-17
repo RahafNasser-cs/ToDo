@@ -36,7 +36,6 @@ class StartFragment : Fragment() {
             recyclerView.setHasFixedSize(true)
         }
     }
-
     override fun onDestroy() {
         super.onDestroy()
         binding = null

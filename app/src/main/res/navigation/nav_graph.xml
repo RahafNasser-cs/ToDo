@@ -21,7 +21,26 @@
         android:id="@+id/taskDetailsFragment"
         android:name="com.example.todo.TaskDetailsFragment"
         android:label="fragment_task_details"
-        tools:layout="@layout/fragment_task_details" />
+        tools:layout="@layout/fragment_task_details" >
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="date"
+            app:argType="string" />
+        <argument
+            android:name="subtask"
+            app:argType="string" />
+        <argument
+            android:name="priority"
+            app:argType="string" />
+        <argument
+            android:name="taskStatus"
+            app:argType="string" />
+        <argument
+            android:name="creationDate"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/newTaskFragment"
         android:name="com.example.todo.NewTaskFragment"

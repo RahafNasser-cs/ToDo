@@ -118,7 +118,18 @@ class TaskViewModel : ViewModel() {
         return "$todayName $todayDate $monthName"
     }
     fun deleteTaskFromLists() {
-
+        val index = findItemIndex(_title.value.toString(),listOfTaskTitle)
+        Log.d("List of title", "all title= $listOfTaskTitle")
+        Log.d("deleteTaskFromLists", "index = $index")
+    }
+    fun findItemIndex(item: String, list: MutableList<String>): Int {
+        var indexItem = 0
+        list.forEachIndexed { index, it -> if (it == item) {
+            indexItem = index
+            Log.d("Title search", "it = $it title = $item")
+            Log.d("findItemIndex()","index = $index --- indexItem = $indexItem")
+        } }
+        return indexItem
     }
 
     fun testing() {

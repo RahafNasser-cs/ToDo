@@ -2,6 +2,7 @@ package com.example.todo.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -17,10 +18,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.StartFragmentDirections
-import com.example.todo.data.listOfSubTask
-import com.example.todo.data.listOfTaskDate
-import com.example.todo.data.listOfTaskPriority
-import com.example.todo.data.listOfTaskTitle
+import com.example.todo.data.*
 import com.example.todo.model.Task
 
 class ItemAdapter(
@@ -46,6 +44,7 @@ class ItemAdapter(
             val title = listOfTaskTitle[position]
             val date = listOfTaskDate[position]
             val subtask = listOfSubTask[position]
+            val taskStatus = listOfTaskStatus[position]
             val priority = when(listOfTaskPriority[position]) {
                 "High"-> {
                     R.color.priority_high
@@ -62,7 +61,10 @@ class ItemAdapter(
             holder.taskDate.text = date
             holder.priorityBtn.setBackgroundColor(context.resources.getColor(priority))
             holder.taskCard.setOnClickListener{
-                val action = StartFragmentDirections.actionStartFragmentToTaskDetailsFragment()
+                Log.d("on click card", "title = $title")
+                Log.d("on click card", date)
+                val action = StartFragmentDirections.actionStartFragmentToTaskDetailsFragment(title,date,subtask,
+                    listOfTaskPriority[position],taskStatus, listTaskCreationDate[position])
                 holder.view.findNavController().navigate(action)
             }
 

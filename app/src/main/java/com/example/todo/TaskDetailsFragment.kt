@@ -15,6 +15,7 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
+import com.example.todo.data.listOfTaskTitle
 import com.example.todo.databinding.FragmentTaskDetailsBinding
 import com.example.todo.model.TaskViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -25,6 +26,24 @@ class TaskDetailsFragment : Fragment() {
     private var binding: FragmentTaskDetailsBinding? = null
     private val sharedViewModel: TaskViewModel by activityViewModels()
     private lateinit var popupWindow: PopupWindow
+    lateinit var taskTitle: String
+    lateinit var taskDate: String
+    lateinit var subtask: String
+    lateinit var priority: String
+    lateinit var taskStatus: String
+    lateinit var taskCreationDate: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        arguments?.let {
+            taskTitle = it.getString(TITLE).toString()
+            taskDate = it.getString(DATE).toString()
+            subtask = it.getString(SUBTASK).toString()
+            priority = it.getString(PRIORITY).toString()
+            taskStatus = it.getString(TASKSTATUS).toString()
+            taskCreationDate = it.getString(CREATIONDATE).toString()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,8 +59,14 @@ class TaskDetailsFragment : Fragment() {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
             taskDetailsFragment = this@TaskDetailsFragment
-
         }
+        Log.d("TaskDetailsFragment", sharedViewModel.title.value.toString())
+        sharedViewModel.title.value = taskTitle
+        sharedViewModel.date.value = taskDate
+        sharedViewModel.subTask.value = subtask
+        sharedViewModel.priority.value = priority
+        sharedViewModel.taskStatus.value = taskStatus
+        sharedViewModel.creationDate.value = taskCreationDate
         taskIsExpiredDate()
     }
 
@@ -94,7 +119,7 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun deleteTask() {
-        //sharedViewModel.deleteTaskFromLists()
+        sharedViewModel.deleteTaskFromLists()
         Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
     }
 
@@ -113,5 +138,14 @@ class TaskDetailsFragment : Fragment() {
 
     fun editTask() {
         Toast.makeText(requireContext(), "Edit task", Toast.LENGTH_SHORT).show()
+    }
+
+    companion object {
+        const val TITLE = "title"
+        const val DATE = "date"
+        const val SUBTASK = "subtask"
+        const val PRIORITY = "priority"
+        const val TASKSTATUS = "taskStatus"
+        const val CREATIONDATE = "creationDate"
     }
 }
