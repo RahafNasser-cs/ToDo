@@ -89,11 +89,11 @@ class TaskViewModel : ViewModel() {
             .build()
         datePicker.show(requireFragmentManager, "tag")
         datePicker.addOnPositiveButtonClickListener {
-            if (sdf.format(it) < sdf.format( Calendar.getInstance().time)) {
-                Toast.makeText(context,"Enter a valid date", Toast.LENGTH_LONG).show()
-            }else {
+//            if (sdf.format(it) < sdf.format( Calendar.getInstance().time)) {
+////                Toast.makeText(context,"Enter a valid date", Toast.LENGTH_LONG).show()
+////            }else {
                 setDate(it)
-            }
+//            }
         }
     }
 
@@ -102,10 +102,6 @@ class TaskViewModel : ViewModel() {
         _creationDate.value = sdf.format(date).toString()
         Log.d("taskCreationDate", _creationDate.value!!)
     }
-
-    //    fun addSubtask() {
-//
-//    }
     fun addNewTaskInfo() {
         listOfTaskTitle.add(_title.value!!)
         listOfTaskDate.add(_date.value!!)
@@ -120,6 +116,9 @@ class TaskViewModel : ViewModel() {
         val todayDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         val monthName = SimpleDateFormat("MMMM").format(Calendar.getInstance().time)
         return "$todayName $todayDate $monthName"
+    }
+    fun deleteTaskFromLists() {
+
     }
 
     fun testing() {
