@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.todo.R
 import com.example.todo.data.*
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.sql.Timestamp
@@ -40,9 +41,10 @@ class TaskViewModel : ViewModel() {
     val today: MutableLiveData<String> get() = _today
 
 
-            init {
+    init {
         restart()
     }
+
     fun restart() {
         _priority.value = priorityOptions[0]
         _date.value = ""
@@ -92,7 +94,7 @@ class TaskViewModel : ViewModel() {
 //            if (sdf.format(it) < sdf.format( Calendar.getInstance().time)) {
 ////                Toast.makeText(context,"Enter a valid date", Toast.LENGTH_LONG).show()
 ////            }else {
-                setDate(it)
+            setDate(it)
 //            }
         }
     }
@@ -102,6 +104,7 @@ class TaskViewModel : ViewModel() {
         _creationDate.value = sdf.format(date).toString()
         Log.d("taskCreationDate", _creationDate.value!!)
     }
+
     fun addNewTaskInfo() {
         listOfTaskTitle.add(_title.value!!)
         listOfTaskDate.add(_date.value!!)
@@ -111,24 +114,40 @@ class TaskViewModel : ViewModel() {
         listTaskCreationDate.add(_creationDate.value!!)
 
     }
+
     fun currentDayMonthForAppTitle(): String {
         val todayName = SimpleDateFormat("EEEE").format(Calendar.getInstance().time)
         val todayDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
         val monthName = SimpleDateFormat("MMMM").format(Calendar.getInstance().time)
         return "$todayName $todayDate $monthName"
     }
-    fun deleteTaskFromLists() {
-        val index = findItemIndex(_title.value.toString(),listOfTaskTitle)
-        Log.d("List of title", "all title= $listOfTaskTitle")
-        Log.d("deleteTaskFromLists", "index = $index")
+
+    fun deleteTaskFromLists(index: Int) {
+        listOfTaskTitle.removeAt(index)
+        listOfTaskDate.removeAt(index)
+        listOfSubTask.removeAt(index)
+        listOfTaskPriority.removeAt(index)
+        listOfTaskStatus.removeAt(index)
     }
-    fun findItemIndex(item: String, list: MutableList<String>): Int {
+
+    fun updateTaskInLists(index: Int) {
+        listOfTaskTitle[index] = _title.value.toString()
+        listOfTaskDate[index] = _date.value.toString()
+        listOfSubTask[index] = _date.value.toString()
+        listOfTaskPriority[index] = _priority.value.toString()
+        listOfTaskStatus[index] = _taskStatus.value.toString()
+    }
+
+    fun findTaskIndexByTitle(title: String, listOfTitle: MutableList<String>): Int {
         var indexItem = 0
-        list.forEachIndexed { index, it -> if (it == item) {
-            indexItem = index
-            Log.d("Title search", "it = $it title = $item")
-            Log.d("findItemIndex()","index = $index --- indexItem = $indexItem")
-        } }
+        listOfTitle.forEachIndexed { index, it ->
+            if (it == title) {
+                indexItem = index
+
+                Log.d("Title search", "it = $it title = $title")
+                Log.d("findItemIndex()", "index = $index --- indexItem = $indexItem")
+            }
+        }
         return indexItem
     }
 
@@ -138,5 +157,19 @@ class TaskViewModel : ViewModel() {
         Log.d("subtask list", "$listOfSubTask")
         Log.d("priority list", "${listOfTaskPriority}")
         Log.d("completion list", "${listOfTaskStatus}")
+    }
+
+    fun backgroundTintColor(priority: String): Int {
+        return when (priority) {
+            "High" -> {
+                R.color.priority_high
+            }
+            "Medium" -> {
+                R.color.priority_medium
+            }
+            else -> {
+                R.color.priority_low
+            }
+        }
     }
 }

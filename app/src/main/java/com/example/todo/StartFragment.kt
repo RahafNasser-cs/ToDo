@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.adapter.ItemAdapter
 import com.example.todo.data.DataSource
+import com.example.todo.data.listOfTaskTitle
 import com.example.todo.databinding.FragmentStartBinding
 import com.example.todo.model.TaskViewModel
 
@@ -32,7 +33,9 @@ class StartFragment : Fragment() {
             startFragment = this@StartFragment
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
-            recyclerView.adapter = ItemAdapter(DataSource().loadTask(), requireContext())
+            if (listOfTaskTitle.isNotEmpty()) {
+                recyclerView.adapter = ItemAdapter(DataSource().loadTask(), requireContext())
+            }
             recyclerView.setHasFixedSize(true)
         }
     }
