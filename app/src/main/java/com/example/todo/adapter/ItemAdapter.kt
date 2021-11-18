@@ -62,6 +62,7 @@ class ItemAdapter(
             }
 
             if (taskStatus == "Complete") {
+                Log.d("In Adapter (if--> complete)","taskstatus $taskStatus")
                 val ss = SpannableString(title)
                 val strikeThrowSpan = StrikethroughSpan()
                 ss.setSpan(strikeThrowSpan,0, title.length-1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
@@ -69,6 +70,7 @@ class ItemAdapter(
 //                holder.titleTask.paintFlags = holder.titleTask.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
 //                holder.titleTask.setTextAppearance(R.style.italicText)
             }else {
+                Log.d("In Adapter (else--> incomplete)","taskstatus $taskStatus")
                 holder.titleTask.text = title
             }
             holder.taskDate.text = date
