@@ -5,4 +5,9 @@
     <style name="Widget.ToDo.Divider" parent="">
         <item name="android:background">?attr/dividerHorizontal</item>
     </style>
+
+    <!-- Text style to italic  -->
+    <style name="italicText">
+        <item name="android:textStyle">italic</item>
+    </style>
 </resources>

@@ -13,6 +13,7 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat.getSystemService
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -44,6 +45,18 @@ class TaskDetailsFragment : Fragment() {
             taskStatus = it.getString(TASKSTATUS).toString()
             taskCreationDate = it.getString(CREATIONDATE).toString()
         }
+
+        // This callback will only be called when MyFragment is at least Started.
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            val action = TaskDetailsFragmentDirections.actionTaskDetailsFragmentToStartFragment(
+                sharedViewModel.title.value.toString(),
+                sharedViewModel.date.value.toString(),
+                sharedViewModel.subTask.value.toString(),
+                sharedViewModel.priority.value.toString(),
+                sharedViewModel.taskStatus.value.toString()
+            )
+            findNavController().navigate(action)
+        }
     }
 
     override fun onCreateView(
@@ -68,8 +81,19 @@ class TaskDetailsFragment : Fragment() {
         sharedViewModel.priority.value = priority
         sharedViewModel.taskStatus.value = taskStatus
         sharedViewModel.creationDate.value = taskCreationDate
-        binding!!.priorityContent.setBackgroundColor(resources.getColor(sharedViewModel.backgroundTintColor(sharedViewModel.priority.value.toString())))
+        binding!!.priorityContent.setBackgroundColor(
+            resources.getColor(
+                sharedViewModel.backgroundTintColor(
+                    sharedViewModel.priority.value.toString()
+                )
+            )
+        )
         taskIsExpiredDate()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        updateCheckBox()
     }
 
 
@@ -121,7 +145,12 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun deleteTask() {
-        sharedViewModel.deleteTaskFromLists(sharedViewModel.findTaskIndexByTitle(sharedViewModel.title.value.toString(),listOfTaskTitle))
+        sharedViewModel.deleteTaskFromLists(
+            sharedViewModel.findTaskIndexByTitle(
+                sharedViewModel.title.value.toString(),
+                listOfTaskTitle
+            )
+        )
         findNavController().navigate(R.id.action_taskDetailsFragment_to_startFragment)
         Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
     }
@@ -143,6 +172,31 @@ class TaskDetailsFragment : Fragment() {
         sharedViewModel.testing()
         findNavController().navigate(R.id.action_taskDetailsFragment_to_editTaskFragment)
         Toast.makeText(requireContext(), "Edit task", Toast.LENGTH_SHORT).show()
+    }
+
+    fun subtaskChecked() {
+        Log.d("before if else ", "before shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}")
+         if (sharedViewModel.isChecked.value!!) {
+             sharedViewModel.numberOfSubtaskChecked()
+            binding!!.subtaskContent.isChecked = false
+            Log.d("if true-->", " shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}")
+        } else {
+            sharedViewModel.numberOfSubtaskChecked()
+            binding!!.subtaskContent.isChecked = true
+            Log.d("else (false) -->", "before shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}")
+        }
+    }
+    fun updateCheckBox() {
+        Log.d("updateCheckBox","task status --> ${sharedViewModel.taskStatus.value.toString()} -- checktext --> ${binding!!.subtaskContent.isChecked} ---  isChecked --> ${sharedViewModel.isChecked.value.toString()}")
+        if (sharedViewModel.taskStatus.value.toString() == "Complete") {
+            binding!!.subtaskContent.isChecked = true
+            if (!sharedViewModel.isChecked.value!!) {
+                sharedViewModel.setIsCheck()
+            }
+        } else {
+            binding!!.subtaskContent.isChecked = false
+        }
+        Log.d("updateCheckBox","task status --> ${sharedViewModel.taskStatus.value.toString()} -- checktext --> ${binding!!.subtaskContent.isChecked}  ---  isChecked --> ${sharedViewModel.isChecked.value.toString()}")
     }
 
     companion object {

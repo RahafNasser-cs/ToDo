@@ -2,6 +2,10 @@ package com.example.todo.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.graphics.Paint
+import android.text.SpannableString
+import android.text.Spanned
+import android.text.style.StrikethroughSpan
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -57,7 +61,18 @@ class ItemAdapter(
                 }
             }
 
-            holder.titleTask.text = title
+            if (taskStatus == "Complete") {
+                Log.d("In Adapter (if--> complete)","taskstatus $taskStatus")
+                val ss = SpannableString(title)
+                val strikeThrowSpan = StrikethroughSpan()
+                ss.setSpan(strikeThrowSpan,0, title.length-1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                holder.titleTask.text = ss
+//                holder.titleTask.paintFlags = holder.titleTask.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+//                holder.titleTask.setTextAppearance(R.style.italicText)
+            }else {
+                Log.d("In Adapter (else--> incomplete)","taskstatus $taskStatus")
+                holder.titleTask.text = title
+            }
             holder.taskDate.text = date
             holder.priorityBtn.setBackgroundColor(context.resources.getColor(priority))
             holder.taskCard.setOnClickListener{

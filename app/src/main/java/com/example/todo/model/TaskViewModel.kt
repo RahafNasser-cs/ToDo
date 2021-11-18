@@ -33,12 +33,21 @@ class TaskViewModel : ViewModel() {
     private var _creationDate = MutableLiveData<String>()
     val creationDate: MutableLiveData<String>
         get() = _creationDate
-    val priorityOptions = listOf("High", "Medium", "Low")
-    val completionOptions = listOf("Complete", "Incomplete")
-    val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
+
+    private var _isChecked = MutableLiveData<Boolean>()
+    val isChecked: MutableLiveData<Boolean>
+    get() = _isChecked
+
+    fun a():Boolean{
+        return isChecked.value.toString().toBoolean()!!
+    }
 
     private var _today = MutableLiveData<String>()
     val today: MutableLiveData<String> get() = _today
+    val priorityOptions = listOf("High", "Medium", "Low")
+    val completionOptions = listOf("Complete", "Incomplete")
+    val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
+    private var numberOfTaskChecked = 0
 
 
     init {
@@ -52,12 +61,16 @@ class TaskViewModel : ViewModel() {
         _title.value = ""
         _taskStatus.value = completionOptions[1]
         _today.value = currentDayMonthForAppTitle()
+        _isChecked.value = false
     }
 
     fun setDate(dateLong: Long) {
         val date = Date(Timestamp(dateLong).time)
         _date.value = sdf.format(date).toString()
         Log.d("setDate", _date.value!!)
+    }
+    fun setIsCheck() {
+        _isChecked.value = !_isChecked.value!!
     }
 
     fun setTitle(title: String) {
@@ -158,7 +171,7 @@ class TaskViewModel : ViewModel() {
         Log.d("priority list", "${listOfTaskPriority}")
         Log.d("completion list", "${listOfTaskStatus}")
     }
-
+    //To set priority color
     fun backgroundTintColor(priority: String): Int {
         return when (priority) {
             "High" -> {
@@ -170,6 +183,33 @@ class TaskViewModel : ViewModel() {
             else -> {
                 R.color.priority_low
             }
+        }
+    }
+    //To count number of subtask is checked
+    fun numberOfSubtaskChecked() {
+//        numberOfTaskChecked++
+        _isChecked.value = !isChecked.value!!
+        if (_isChecked.value!!) {
+            _taskStatus.value = completionOptions[0]
+            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+            listOfTaskStatus[index] = completionOptions[0]
+        }else {
+            _taskStatus.value = completionOptions[1]
+            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+            listOfTaskStatus[index] = completionOptions[1]
+        }
+        //checkTaskIsComplete(numberOfTaskChecked)
+    }
+    //To change task status to complete
+    fun checkTaskIsComplete(checkedNumber: Int) {
+        if (checkedNumber == 1) {
+            _taskStatus.value = completionOptions[0]
+            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+            listOfTaskStatus[index] = completionOptions[0]
+        } else {
+            _taskStatus.value = completionOptions[1]
+            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+            listOfTaskStatus[index] = completionOptions[1]
         }
     }
 }
