@@ -12,4 +12,14 @@
     <string name="task_title1">Workout</string>
 
     <string name="task_subtask1">Push up 20</string>
+    <string name="task_title">Task Title</string>
+    <string name="date_creation">Date creation</string>
+    <string name="deadline">Deadline</string>
+    <string name="subtask">Subtask</string>
+    <string name="priority">Priority</string>
+    <string name="task_state">Task State</string>
+    <string name="save">Save</string>
+    <string name="title">Title</string>
+    <string name="add_task">Add Task</string>
+    <string name="today">TODAY</string>
 </resources>

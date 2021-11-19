@@ -52,7 +52,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="50dp"
                 android:layout_marginTop="120dp"
-                android:text="Task Title"
+                android:text="@string/task_title"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -74,7 +74,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:text="Date creation"
+                android:text="@string/date_creation"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/task_title"
                 app:layout_constraintTop_toBottomOf="@+id/task_title" />
@@ -106,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:layout_marginStart="50dp"
-                android:text="Deadline"
+                android:text="@string/deadline"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider" />
@@ -126,7 +126,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Subtask"
+                android:text="@string/subtask"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/priority"
                 app:layout_constraintTop_toBottomOf="@+id/priority" />
@@ -148,7 +148,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Priority"
+                android:text="@string/priority"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/deadline"
                 app:layout_constraintTop_toBottomOf="@+id/deadline" />
@@ -167,7 +167,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
-                android:text="Task State"
+                android:text="@string/task_state"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="@+id/subtask"
                 app:layout_constraintTop_toBottomOf="@+id/subtask" />

@@ -27,7 +27,7 @@
             android:layout_marginTop="60dp"
             app:counterEnabled="true"
             app:counterMaxLength="20"
-            android:hint="Title"
+            android:hint="@string/title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="270dp"
@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/task_title_input_layout"
             app:layout_constraintStart_toStartOf="@+id/task_title_input_layout"
             android:id="@+id/date_input_layout"
-            android:hint="Deadline"
+            android:hint="@string/deadline"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="172dp"
@@ -86,7 +86,7 @@
             app:layout_constraintTop_toBottomOf="@+id/date_input_layout"
             app:layout_constraintEnd_toEndOf="@+id/task_title_input_layout"
             android:layout_marginTop="20dp"
-            android:hint="Subtask"
+            android:hint="@string/subtask"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="270dp"
@@ -99,7 +99,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Priority"
+            android:text="@string/priority"
             android:id="@+id/priority_textview"
             app:layout_constraintTop_toBottomOf="@+id/subtask_input_layout"
             app:layout_constraintStart_toStartOf="@id/subtask_input_layout"
@@ -174,7 +174,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Task State"
+            android:text="@string/task_state"
             android:id="@+id/task_state_textview"
             app:layout_constraintTop_toBottomOf="@+id/priority_textview"
             app:layout_constraintStart_toStartOf="@+id/priority_textview"
@@ -206,7 +206,7 @@
         <com.google.android.material.button.MaterialButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Add Task"
+            android:text="@string/add_task"
             android:onClick="@{()-> newTaskFragment.goToNextFragment()}"
             android:id="@+id/done_btn"
             app:layout_constraintBottom_toBottomOf="parent"
