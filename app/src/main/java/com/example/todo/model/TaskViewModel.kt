@@ -2,7 +2,6 @@ package com.example.todo.model
 
 import android.content.Context
 import android.util.Log
-import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -36,11 +35,8 @@ class TaskViewModel : ViewModel() {
 
     private var _isChecked = MutableLiveData<Boolean>()
     val isChecked: MutableLiveData<Boolean>
-    get() = _isChecked
+        get() = _isChecked
 
-    fun a():Boolean{
-        return isChecked.value.toString().toBoolean()!!
-    }
 
     private var _today = MutableLiveData<String>()
     val today: MutableLiveData<String> get() = _today
@@ -48,6 +44,10 @@ class TaskViewModel : ViewModel() {
     val completionOptions = listOf("Complete", "Incomplete")
     val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
     private var numberOfTaskChecked = 0
+
+    //////////////////////////////////////////////////////
+    var dataset = DataSource()
+    private var index = -1
 
 
     init {
@@ -69,6 +69,7 @@ class TaskViewModel : ViewModel() {
         _date.value = sdf.format(date).toString()
         Log.d("setDate", _date.value!!)
     }
+
     fun setIsCheck() {
         _isChecked.value = !_isChecked.value!!
     }
@@ -118,16 +119,6 @@ class TaskViewModel : ViewModel() {
         Log.d("taskCreationDate", _creationDate.value!!)
     }
 
-    fun addNewTaskInfo() {
-        listOfTaskTitle.add(_title.value!!)
-        listOfTaskDate.add(_date.value!!)
-        listOfSubTask.add(_subTask.value!!)
-        listOfTaskPriority.add(_priority.value!!)
-        listOfTaskStatus.add(_taskStatus.value!!)
-        listTaskCreationDate.add(_creationDate.value!!)
-
-    }
-
     fun currentDayMonthForAppTitle(): String {
         val todayName = SimpleDateFormat("EEEE").format(Calendar.getInstance().time)
         val todayDate = Calendar.getInstance().get(Calendar.DAY_OF_MONTH)
@@ -135,42 +126,81 @@ class TaskViewModel : ViewModel() {
         return "$todayName $todayDate $monthName"
     }
 
-    fun deleteTaskFromLists(index: Int) {
-        listOfTaskTitle.removeAt(index)
-        listOfTaskDate.removeAt(index)
-        listOfSubTask.removeAt(index)
-        listOfTaskPriority.removeAt(index)
-        listOfTaskStatus.removeAt(index)
+//    fun addNewTaskInfo() {
+//        listOfTaskTitle.add(_title.value!!)
+//        listOfTaskDate.add(_date.value!!)
+//        listOfSubTask.add(_subTask.value!!)
+//        listOfTaskPriority.add(_priority.value!!)
+//        listOfTaskStatus.add(_taskStatus.value!!)
+//        listTaskCreationDate.add(_creationDate.value!!)
+//    }
+
+    fun addNewTaskInfoTypeTask() {
+        dataset.addTask(
+            _title.value!!,
+            _date.value!!,
+            _subTask.value!!,
+            _priority.value!!,
+            _taskStatus.value!!,
+            _creationDate.value!!
+        )
+        index++
     }
 
-    fun updateTaskInLists(index: Int) {
-        listOfTaskTitle[index] = _title.value.toString()
-        listOfTaskDate[index] = _date.value.toString()
-        listOfSubTask[index] = _date.value.toString()
-        listOfTaskPriority[index] = _priority.value.toString()
-        listOfTaskStatus[index] = _taskStatus.value.toString()
+    fun deleteTaskFromTypeTask() {
+        dataset.deleteTask(index)
     }
 
-    fun findTaskIndexByTitle(title: String, listOfTitle: MutableList<String>): Int {
-        var indexItem = 0
-        listOfTitle.forEachIndexed { index, it ->
-            if (it == title) {
-                indexItem = index
-
-                Log.d("Title search", "it = $it title = $title")
-                Log.d("findItemIndex()", "index = $index --- indexItem = $indexItem")
-            }
-        }
-        return indexItem
+    fun updateTaskInTaskType() {
+        dataset.updateTask(
+            _title.value!!,
+            _date.value!!,
+            _subTask.value!!,
+            _priority.value!!,
+            _taskStatus.value!!,
+            _creationDate.value!!,
+            index
+        )
     }
+
+//    fun deleteTaskFromLists(index: Int) {
+//        listOfTaskTitle.removeAt(index)
+//        listOfTaskDate.removeAt(index)
+//        listOfSubTask.removeAt(index)
+//        listOfTaskPriority.removeAt(index)
+//        listOfTaskStatus.removeAt(index)
+//    }
+
+//    fun updateTaskInLists(index: Int) {
+//        listOfTaskTitle[index] = _title.value.toString()
+//        listOfTaskDate[index] = _date.value.toString()
+//        listOfSubTask[index] = _date.value.toString()
+//        listOfTaskPriority[index] = _priority.value.toString()
+//        listOfTaskStatus[index] = _taskStatus.value.toString()
+//    }
+
+//    fun findTaskIndexByTitle(title: String, listOfTitle: MutableList<String>): Int {
+//        var indexItem = 0
+//        listOfTitle.forEachIndexed { index, it ->
+//            if (it == title) {
+//                indexItem = index
+//
+//                Log.d("Title search", "it = $it title = $title")
+//                Log.d("findItemIndex()", "index = $index --- indexItem = $indexItem")
+//            }
+//        }
+//        return indexItem
+//    }
 
     fun testing() {
-        Log.d("title list", "$listOfTaskTitle")
-        Log.d("date list", "$listOfTaskDate")
-        Log.d("subtask list", "$listOfSubTask")
-        Log.d("priority list", "${listOfTaskPriority}")
-        Log.d("completion list", "${listOfTaskStatus}")
+//        Log.d("title list", "$listOfTaskTitle")
+//        Log.d("date list", "$listOfTaskDate")
+//        Log.d("subtask list", "$listOfSubTask")
+//        Log.d("priority list", "${listOfTaskPriority}")
+//        Log.d("completion list", "${listOfTaskStatus}")
+        Log.d("dataset-->", "${dataset}")
     }
+
     //To set priority color
     fun backgroundTintColor(priority: String): Int {
         return when (priority) {
@@ -185,31 +215,37 @@ class TaskViewModel : ViewModel() {
             }
         }
     }
+
     //To count number of subtask is checked
     fun numberOfSubtaskChecked() {
 //        numberOfTaskChecked++
         _isChecked.value = !isChecked.value!!
         if (_isChecked.value!!) {
             _taskStatus.value = completionOptions[0]
-            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-            listOfTaskStatus[index] = completionOptions[0]
-        }else {
+//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+//            listOfTaskStatus[index] = completionOptions[0]
+            dataset.listOfTasks[index].taskStatus = completionOptions[0]
+        } else {
             _taskStatus.value = completionOptions[1]
-            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-            listOfTaskStatus[index] = completionOptions[1]
+//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+//            listOfTaskStatus[index] = completionOptions[1]
+            dataset.listOfTasks[index].taskStatus = completionOptions[1]
+
         }
         //checkTaskIsComplete(numberOfTaskChecked)
     }
+
     //To change task status to complete
-    fun checkTaskIsComplete(checkedNumber: Int) {
-        if (checkedNumber == 1) {
-            _taskStatus.value = completionOptions[0]
-            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-            listOfTaskStatus[index] = completionOptions[0]
-        } else {
-            _taskStatus.value = completionOptions[1]
-            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-            listOfTaskStatus[index] = completionOptions[1]
-        }
-    }
+//    fun checkTaskIsComplete(checkedNumber: Int) {
+//        if (checkedNumber == 1) {
+//            _taskStatus.value = completionOptions[0]
+//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+//            listOfTaskStatus[index] = completionOptions[0]
+//        } else {
+//            _taskStatus.value = completionOptions[1]
+//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
+//            listOfTaskStatus[index] = completionOptions[1]
+//        }
+//    }
+
 }

@@ -34,7 +34,6 @@
     <fragment
         android:id="@+id/taskDetailsFragment"
         android:name="com.example.todo.TaskDetailsFragment"
-        android:label="Task Details"
         tools:layout="@layout/fragment_task_details">
         <argument
             android:name="title"
@@ -66,7 +65,6 @@
     <fragment
         android:id="@+id/newTaskFragment"
         android:name="com.example.todo.NewTaskFragment"
-        android:label="New Task"
         tools:layout="@layout/fragment_new_task">
         <action
             android:id="@+id/action_newTaskFragment_to_startFragment"
@@ -76,7 +74,6 @@
     <fragment
         android:id="@+id/editTaskFragment"
         android:name="com.example.todo.EditTaskFragment"
-        android:label="Edit Task"
         tools:layout="@layout/fragment_edit_task">
         <action
             android:id="@+id/action_editTaskFragment_to_taskDetailsFragment"

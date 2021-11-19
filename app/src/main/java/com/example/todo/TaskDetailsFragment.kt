@@ -1,9 +1,7 @@
 package com.example.todo
 
-import android.content.Context
 import android.os.Build
 import android.os.Bundle
-import android.transition.TransitionManager
 import android.util.Log
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -13,11 +11,11 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.PopupWindow
 import android.widget.Toast
+import android.widget.Toolbar
 import androidx.activity.addCallback
-import androidx.core.content.ContextCompat.getSystemService
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import com.example.todo.data.listOfTaskTitle
 import com.example.todo.databinding.FragmentTaskDetailsBinding
 import com.example.todo.model.TaskViewModel
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
@@ -69,6 +67,8 @@ class TaskDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //To set fragment title
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.taskDetailsFragment)
         binding!!.apply {
             viewModel = sharedViewModel
             lifecycleOwner = viewLifecycleOwner
@@ -145,12 +145,7 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun deleteTask() {
-        sharedViewModel.deleteTaskFromLists(
-            sharedViewModel.findTaskIndexByTitle(
-                sharedViewModel.title.value.toString(),
-                listOfTaskTitle
-            )
-        )
+        sharedViewModel.deleteTaskFromTypeTask()
         findNavController().navigate(R.id.action_taskDetailsFragment_to_startFragment)
         Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
     }
@@ -198,6 +193,7 @@ class TaskDetailsFragment : Fragment() {
         }
         Log.d("updateCheckBox","task status --> ${sharedViewModel.taskStatus.value.toString()} -- checktext --> ${binding!!.subtaskContent.isChecked}  ---  isChecked --> ${sharedViewModel.isChecked.value.toString()}")
     }
+
 
     companion object {
         const val TITLE = "title"

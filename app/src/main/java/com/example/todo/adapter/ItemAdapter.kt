@@ -44,12 +44,12 @@ class ItemAdapter(
 
     @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        if (listOfTaskTitle.isNotEmpty()) {
-            val title = listOfTaskTitle[position]
-            val date = listOfTaskDate[position]
-            val subtask = listOfSubTask[position]
-            val taskStatus = listOfTaskStatus[position]
-            val priority = when(listOfTaskPriority[position]) {
+        if (dataset.isNotEmpty()) {
+            val title = dataset[position].title
+            val date = dataset[position].date
+            val subtask = dataset[position].subtask
+            val taskStatus = dataset[position].taskStatus
+            val priority = when(dataset[position].priority) {
                 "High"-> {
                     R.color.priority_high
                 }
@@ -67,8 +67,6 @@ class ItemAdapter(
                 val strikeThrowSpan = StrikethroughSpan()
                 ss.setSpan(strikeThrowSpan,0, title.length-1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 holder.titleTask.text = ss
-//                holder.titleTask.paintFlags = holder.titleTask.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
-//                holder.titleTask.setTextAppearance(R.style.italicText)
             }else {
                 Log.d("In Adapter (else--> incomplete)","taskstatus $taskStatus")
                 holder.titleTask.text = title
@@ -79,19 +77,11 @@ class ItemAdapter(
                 Log.d("on click card", "title = $title")
                 Log.d("on click card", date)
                 val action = StartFragmentDirections.actionStartFragmentToTaskDetailsFragment(title,date,subtask,
-                    listOfTaskPriority[position],taskStatus, listTaskCreationDate[position])
+                    dataset[position].priority,taskStatus, dataset[position].creationDate)
                 holder.view.findNavController().navigate(action)
             }
-
-//            val item = dataset[position]
-//            holder.titleTask.text = context.resources.getString(item.taskTitleId)
-//            holder.priorityBtn.setBackgroundColor(context.resources.getColor(item.priorityId))
-//            holder.taskCard.setOnClickListener{
-//                val action = StartFragmentDirections.actionStartFragmentToTaskDetailsFragment()
-//                holder.view.findNavController().navigate(action)
-//            }
         }
     }
 
-    override fun getItemCount(): Int = listOfTaskTitle.size
+    override fun getItemCount(): Int = dataset.size
 }
