@@ -16,8 +16,8 @@
     <color name="priority_high">#FF7276</color>
     <color name="priority_medium">#ffff9e</color>
     <color name="priority_low">#90EE90</color>
-    <color name="white_dark">#F7F6F6</color>
-    <color name="white_darkk">#FAE1BF</color>
+    <color name="white_dark">#F5F1F1</color>
+    <color name="white_for_splash">#fefafb</color>
 
 
 
