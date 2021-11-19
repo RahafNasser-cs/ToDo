@@ -1,19 +1,17 @@
 package com.example.todo
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.view.*
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleObserver
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.adapter.ItemAdapter
-import com.example.todo.data.DataSource
-import com.example.todo.data.listOfTaskTitle
 import com.example.todo.databinding.FragmentStartBinding
+import com.example.todo.model.Task
 import com.example.todo.model.TaskViewModel
 
 class StartFragment : Fragment() {
@@ -25,9 +23,11 @@ class StartFragment : Fragment() {
     lateinit var priority: String
     lateinit var taskStatus: String
     lateinit var taskCreationDate: String
+    var listOfFilteredTask = listOf<Task>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
         arguments?.let {
             taskTitle = it.getString(TaskDetailsFragment.TITLE).toString()
             taskDate = it.getString(TaskDetailsFragment.DATE).toString()
@@ -48,6 +48,8 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        //To set fragment title
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.startFragment)
         sharedViewModel.title.value = taskTitle
         sharedViewModel.date.value = taskDate
         sharedViewModel.subTask.value = subtask
@@ -58,13 +60,14 @@ class StartFragment : Fragment() {
             startFragment = this@StartFragment
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
-
         }
-
         sharedViewModel.testing()
-
-
     }
+
+//    override fun onAttach(context: Context) {
+//        super.onAttach(context)
+//        activity?.title = "Rahaf"
+//    }
     override fun onDestroy() {
         super.onDestroy()
         binding = null
@@ -72,8 +75,8 @@ class StartFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        if (listOfTaskTitle.isNotEmpty()) {
-            binding?.recyclerView?.adapter = ItemAdapter(DataSource().loadTask(), requireContext())
+        if (sharedViewModel.dataset.loadTask().isNotEmpty()) {
+            binding?.recyclerView?.adapter = ItemAdapter(sharedViewModel.dataset.loadTask(), requireContext())
         }
         binding?.recyclerView?.setHasFixedSize(true)
     }
@@ -81,13 +84,47 @@ class StartFragment : Fragment() {
         sharedViewModel.restart()
         findNavController().navigate(R.id.action_startFragment_to_newTaskFragment)
     }
+    fun filterTaskPriority(filterTag: String="") {
+        Log.d("filterTaskPriority()", "flage = ${sharedViewModel.dataset.loadFilterTaskPriority(filterTag)}")
+        listOfFilteredTask=sharedViewModel.dataset.loadFilterTaskPriority(filterTag)
+        binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
+    }
+    fun filterTaskDate(filterTag: String = "") {
+        listOfFilteredTask = sharedViewModel.dataset.loadFilterTaskDate(filterTag)
+        binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
+    }
+    fun filteredTask(filterTag: String) {
+        Log.d("filteredTask()", "flage = ${sharedViewModel.dataset.loadFilterTaskPriority("High")}")
+        listOfFilteredTask=sharedViewModel.dataset.loadFilterTaskPriority(filterTag)
+        binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_item, menu)
+    }
 
-    companion object {
-        const val TITLE = "title"
-        const val DATE = "date"
-        const val SUBTASK = "subtask"
-        const val PRIORITY = "priority"
-        const val TASKSTATUS = "taskStatus"
-        const val CREATIONDATE = "creationDate"
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.high_priority -> {
+                filterTaskPriority("High")
+            }
+            R.id.medium_priority -> {
+                filterTaskPriority("Medium")
+            }
+            R.id.low_priority -> {
+                filterTaskPriority("Low")
+            }
+            R.id.no_filter -> {
+                filterTaskPriority()
+            }
+            R.id.deadline_filter -> {
+                filterTaskDate("deadline")
+            }
+            R.id.creation_date -> {
+                filterTaskDate()
+            }
+
+        }
+        return true
     }
 }

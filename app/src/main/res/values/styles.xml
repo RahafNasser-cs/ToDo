@@ -10,4 +10,14 @@
     <style name="italicText">
         <item name="android:textStyle">italic</item>
     </style>
+
+    <!-- To Change menu icon -->
+    <style name="Widget.ActionButton.ToDo" parent="@android:style/Widget.Holo.ActionButton.Overflow">
+        <item name="android:src">@drawable/ic_baseline_filter_list_24</item>
+    </style>
+
+    <!-- -->
+    <style name="MyActionBarTheme" parent="@android:style/Widget.Holo.Light.ActionBar">
+        <item name="android:background">@color/orange_light</item>
+    </style>
 </resources>

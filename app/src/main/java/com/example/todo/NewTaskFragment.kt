@@ -1,20 +1,17 @@
 package com.example.todo
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.fragment.app.FragmentManager
+import android.widget.Toolbar
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todo.databinding.FragmentNewTaskBinding
 import com.example.todo.model.TaskViewModel
-import com.google.android.material.datepicker.MaterialDatePicker
-import java.sql.Timestamp
-import java.text.SimpleDateFormat
 import java.util.*
 
 class NewTaskFragment : Fragment() {
@@ -31,11 +28,14 @@ class NewTaskFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        //To set fragment title
+        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.newTaskFragment)
         binding!!.apply {
             newTaskFragment = this@NewTaskFragment
             lifecycleOwner = viewLifecycleOwner
             viewModle = sharedViewModel
         }
+
     }
 
     override fun onDestroy() {
@@ -46,7 +46,7 @@ class NewTaskFragment : Fragment() {
     fun goToNextFragment() {
         if (TaskContentIsValid()) {
             sharedViewModel.taskCreationDate()
-            sharedViewModel.addNewTaskInfo()
+            sharedViewModel.addNewTaskInfoTypeTask()
             findNavController().navigate(R.id.action_newTaskFragment_to_startFragment)
         }
     }
@@ -57,7 +57,7 @@ class NewTaskFragment : Fragment() {
 
     fun TaskContentIsValid(): Boolean {
         return if (!titleIsValid()) {
-            Toast.makeText(requireContext(), "Enter a title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Enter a valid title", Toast.LENGTH_SHORT).show()
             false
         } else if (!dateIsValid()) {
             Toast.makeText(requireContext(), "Choose a date", Toast.LENGTH_SHORT).show()
@@ -71,7 +71,7 @@ class NewTaskFragment : Fragment() {
     }
 
     fun titleIsValid(): Boolean {
-        return binding!!.taskTitleEditText.text.toString() != ""
+        return binding!!.taskTitleEditText.text.toString() != "" && binding!!.taskTitleEditText.text.toString().length <= 20
     }
 
     fun dateIsValid(): Boolean {

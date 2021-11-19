@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="@+id/task_title"
                 app:layout_constraintBottom_toBottomOf="@+id/task_title"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="20"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="200dp"
@@ -52,7 +52,7 @@
                 android:id="@+id/date_creation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="55dp"
+                android:layout_marginTop="56dp"
                 android:text="Date creation"
                 app:layout_constraintStart_toStartOf="@+id/task_title"
                 app:layout_constraintTop_toBottomOf="@+id/task_title"/>
@@ -69,13 +69,14 @@
                 android:id="@+id/deadline"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="28dp"
                 android:text="Deadline"
                 app:layout_constraintStart_toStartOf="@+id/date_creation"
                 app:layout_constraintTop_toBottomOf="@+id/date_creation" />
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="140dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 app:layout_constraintTop_toBottomOf="@+id/date_creation_content"
                 app:layout_constraintStart_toStartOf="@+id/date_creation_content"
                 android:id="@+id/date_input_layout"
@@ -101,7 +102,7 @@
                 android:id="@+id/subtask"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="53dp"
                 android:text="Subtask"
                 app:layout_constraintStart_toStartOf="@+id/deadline"
                 app:layout_constraintTop_toBottomOf="@+id/deadline" />
@@ -109,6 +110,7 @@
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/subtask_input_layout"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/calender_img"
                 app:layout_constraintTop_toBottomOf="@+id/calender_img"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
@@ -123,7 +125,7 @@
                 android:id="@+id/priority"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="50dp"
                 android:text="Priority"
                 app:layout_constraintStart_toStartOf="@+id/subtask"
                 app:layout_constraintTop_toBottomOf="@+id/subtask" />
@@ -133,6 +135,7 @@
                 android:id="@+id/priority_options"
                 android:orientation="horizontal"
                 android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/subtask_input_layout"
                 app:layout_constraintTop_toBottomOf="@+id/subtask_input_layout"
                 >
@@ -167,7 +170,7 @@
                 android:id="@+id/task_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="41dp"
+                android:layout_marginTop="45dp"
                 android:text="Task State"
                 app:layout_constraintStart_toStartOf="@+id/priority"
                 app:layout_constraintTop_toBottomOf="@+id/priority" />
@@ -175,6 +178,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/task_status_options"
+                android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="@+id/priority_options"
                 app:layout_constraintTop_toBottomOf="@id/priority_options"
                 android:orientation="horizontal">
@@ -204,8 +208,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/task_status_options"
-                android:layout_marginBottom="50dp"
-                android:layout_marginTop="80dp"/>
+                android:layout_marginTop="50dp"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

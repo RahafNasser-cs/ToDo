@@ -1,7 +1,12 @@
 package com.example.todo.model
 
+var currentId=0
 data class Task(
-    val taskTitleId: Int,
-    val taskDetailsId: Int,
-    val priorityId: Int
+    var title: String,
+    var date: String,
+    var subtask: String,
+    var priority: String,
+    var taskStatus: String,
+    var creationDate: String,
+    var id: Int= currentId++
 )

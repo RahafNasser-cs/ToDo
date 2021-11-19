@@ -158,6 +158,7 @@
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:layout_marginTop="28dp"
+                android:clickable="false"
                 android:layout_marginStart="47dp"
                 app:layout_constraintStart_toEndOf="@id/priority"
                 app:layout_constraintTop_toBottomOf="@+id/deadline_content" />
