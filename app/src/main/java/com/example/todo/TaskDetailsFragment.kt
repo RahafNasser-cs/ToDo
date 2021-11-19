@@ -151,8 +151,8 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun taskIsExpiredDate() {
-        if (sharedViewModel.date.value!!.toString() < SimpleDateFormat(
-                "dd-MM-yyy",
+        if (sharedViewModel.dateTimeMillis < SimpleDateFormat(
+                "yyyy-MM-dd HH:mm:ss.SSS",
                 Locale.UK
             ).format(Calendar.getInstance().time).toString()
         ) {

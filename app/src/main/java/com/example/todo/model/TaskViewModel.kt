@@ -17,6 +17,8 @@ class TaskViewModel : ViewModel() {
     private var _date = MutableLiveData<String>()
     val date: MutableLiveData<String>
         get() = _date
+    private var _dateTimeMillis = ""
+    val dateTimeMillis: String get() = _dateTimeMillis
     private var _title = MutableLiveData<String>()
     val title: MutableLiveData<String>
         get() = _title
@@ -45,7 +47,6 @@ class TaskViewModel : ViewModel() {
     val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
     private var numberOfTaskChecked = 0
 
-    //////////////////////////////////////////////////////
     var dataset = DataSource()
     private var index = -1
 
@@ -68,6 +69,12 @@ class TaskViewModel : ViewModel() {
         val date = Date(Timestamp(dateLong).time)
         _date.value = sdf.format(date).toString()
         Log.d("setDate", _date.value!!)
+
+    }
+    fun convertToTimeMillis(date: Long) {
+        var sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
+        Log.d("setDate milisec",sdf.format(date))
+        _dateTimeMillis = sdf.format(date)
     }
 
     fun setIsCheck() {
@@ -92,11 +99,6 @@ class TaskViewModel : ViewModel() {
     fun setTaskStatusComplete(taskStatus: String) {
         _taskStatus.value = taskStatus
     }
-//    fun addListOfSubtask(subtask: String) {
-//        _subTaskList.add(subtask)
-//        _subTask.value = ""
-//        //subTaskList = _subTaskList.joinToString("\n")
-//    }
 
     fun showDatePicker(requireFragmentManager: FragmentManager, context: Context) {
         val datePicker = MaterialDatePicker.Builder.datePicker()
@@ -109,6 +111,7 @@ class TaskViewModel : ViewModel() {
 ////                Toast.makeText(context,"Enter a valid date", Toast.LENGTH_LONG).show()
 ////            }else {
             setDate(it)
+            convertToTimeMillis(it)
 //            }
         }
     }
@@ -125,15 +128,6 @@ class TaskViewModel : ViewModel() {
         val monthName = SimpleDateFormat("MMMM").format(Calendar.getInstance().time)
         return "$todayName $todayDate $monthName"
     }
-
-//    fun addNewTaskInfo() {
-//        listOfTaskTitle.add(_title.value!!)
-//        listOfTaskDate.add(_date.value!!)
-//        listOfSubTask.add(_subTask.value!!)
-//        listOfTaskPriority.add(_priority.value!!)
-//        listOfTaskStatus.add(_taskStatus.value!!)
-//        listTaskCreationDate.add(_creationDate.value!!)
-//    }
 
     fun addNewTaskInfoTypeTask() {
         dataset.addTask(
@@ -163,41 +157,7 @@ class TaskViewModel : ViewModel() {
         )
     }
 
-//    fun deleteTaskFromLists(index: Int) {
-//        listOfTaskTitle.removeAt(index)
-//        listOfTaskDate.removeAt(index)
-//        listOfSubTask.removeAt(index)
-//        listOfTaskPriority.removeAt(index)
-//        listOfTaskStatus.removeAt(index)
-//    }
-
-//    fun updateTaskInLists(index: Int) {
-//        listOfTaskTitle[index] = _title.value.toString()
-//        listOfTaskDate[index] = _date.value.toString()
-//        listOfSubTask[index] = _date.value.toString()
-//        listOfTaskPriority[index] = _priority.value.toString()
-//        listOfTaskStatus[index] = _taskStatus.value.toString()
-//    }
-
-//    fun findTaskIndexByTitle(title: String, listOfTitle: MutableList<String>): Int {
-//        var indexItem = 0
-//        listOfTitle.forEachIndexed { index, it ->
-//            if (it == title) {
-//                indexItem = index
-//
-//                Log.d("Title search", "it = $it title = $title")
-//                Log.d("findItemIndex()", "index = $index --- indexItem = $indexItem")
-//            }
-//        }
-//        return indexItem
-//    }
-
     fun testing() {
-//        Log.d("title list", "$listOfTaskTitle")
-//        Log.d("date list", "$listOfTaskDate")
-//        Log.d("subtask list", "$listOfSubTask")
-//        Log.d("priority list", "${listOfTaskPriority}")
-//        Log.d("completion list", "${listOfTaskStatus}")
         Log.d("dataset-->", "${dataset}")
     }
 
@@ -222,30 +182,12 @@ class TaskViewModel : ViewModel() {
         _isChecked.value = !isChecked.value!!
         if (_isChecked.value!!) {
             _taskStatus.value = completionOptions[0]
-//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-//            listOfTaskStatus[index] = completionOptions[0]
             dataset.listOfTasks[index].taskStatus = completionOptions[0]
         } else {
             _taskStatus.value = completionOptions[1]
-//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-//            listOfTaskStatus[index] = completionOptions[1]
             dataset.listOfTasks[index].taskStatus = completionOptions[1]
 
         }
-        //checkTaskIsComplete(numberOfTaskChecked)
     }
-
-    //To change task status to complete
-//    fun checkTaskIsComplete(checkedNumber: Int) {
-//        if (checkedNumber == 1) {
-//            _taskStatus.value = completionOptions[0]
-//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-//            listOfTaskStatus[index] = completionOptions[0]
-//        } else {
-//            _taskStatus.value = completionOptions[1]
-//            val index = findTaskIndexByTitle(_title.value.toString(), listOfTaskTitle)
-//            listOfTaskStatus[index] = completionOptions[1]
-//        }
-//    }
 
 }
