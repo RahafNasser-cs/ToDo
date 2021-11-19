@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ToDo</string>
+    <string name="app_name">Done</string>
     <!-- Fragments name -->
     <string name="startFragment">Done</string>
     <string name="newTaskFragment">New Task</string>
