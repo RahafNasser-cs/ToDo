@@ -1,6 +1,13 @@
 <resources>
     <string name="app_name">ToDo</string>
-    <!-- TODO: Remove or change this placeholder text -->
+    <!-- Fragments name -->
+    <string name="startFragment">Done</string>
+    <string name="newTaskFragment">New Task</string>
+    <string name="editTaskFragment">Edit Task</string>
+    <string name="taskDetailsFragment">Task Details</string>
+
+
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="task_title1">Workout</string>

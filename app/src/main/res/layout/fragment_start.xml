@@ -50,16 +50,16 @@
             android:id="@+id/today"
             app:layout_constraintStart_toStartOf="@+id/today_word"
             app:layout_constraintTop_toBottomOf="@+id/today_word"/>
-
         <View
             android:id="@+id/divider"
-            style="?attr/dividerHorizontal"
-            android:layout_width="380dp"
+            style="@style/Widget.ToDo.Divider"
+            android:layout_width="385dp"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             app:layout_constraintStart_toStartOf="@id/today"
-            app:layout_constraintTop_toBottomOf="@id/today" />
+            app:layout_constraintTop_toBottomOf="@id/today"
+            />
 
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"

@@ -38,7 +38,7 @@
                 app:layout_constraintTop_toTopOf="@+id/task_title"
                 app:layout_constraintBottom_toBottomOf="@+id/task_title"
                 app:counterEnabled="true"
-                app:counterMaxLength="30"
+                app:counterMaxLength="20"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="200dp"

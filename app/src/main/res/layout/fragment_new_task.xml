@@ -27,7 +27,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginTop="60dp"
             app:counterEnabled="true"
-            app:counterMaxLength="30"
+            app:counterMaxLength="20"
             android:hint="Title"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
             <com.google.android.material.textfield.TextInputEditText
