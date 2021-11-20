@@ -1,14 +1,12 @@
 package com.example.todo.model
 
 import android.content.Context
-import android.content.res.Resources
 import android.util.Log
 import android.widget.Toast
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.todo.R
-import com.example.todo.StartFragment
 import com.example.todo.data.*
 import com.google.android.material.datepicker.MaterialDatePicker
 import java.sql.Timestamp
@@ -45,8 +43,7 @@ class TaskViewModel : ViewModel() {
     private var _today = MutableLiveData<String>()
     val today: MutableLiveData<String> get() = _today
     val priorityOptions = listOf("High", "Medium", "Low")
-//    lateinit var context: Context
-    var completionOptions = listOf("Complete","Incomplete")
+    var completionOptions = listOf("Complete", "Incomplete")
     val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
     private var numberOfTaskChecked = 0
 
@@ -57,12 +54,6 @@ class TaskViewModel : ViewModel() {
     init {
         restart()
     }
-
-//    fun giveContext(fragmentContext: Context){
-//        context = fragmentContext
-//        completionOptions.addAll(listOf(context.getString(R.string.compelet_status), context.getString(
-//            R.string.incomplete_status)))
-//    }
 
     fun restart() {
         _priority.value = priorityOptions[0]
@@ -80,24 +71,15 @@ class TaskViewModel : ViewModel() {
         Log.d("setDate", _date.value!!)
 
     }
+
     fun convertToTimeMillis(date: Long) {
         var sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-        Log.d("setDate milisec",sdf.format(date))
+        Log.d("setDate milisec", sdf.format(date))
         _dateTimeMillis = sdf.format(date)
     }
 
     fun setIsCheck() {
         _isChecked.value = !_isChecked.value!!
-    }
-
-    fun setTitle(title: String) {
-        _title.value = title
-        Log.d("setTitle", _title.value!!)
-    }
-
-    fun setSubtask(subtask: String) {
-        _subTask.value = subtask
-        Log.d("setSubtask", _subTask.value!!)
     }
 
     fun setPriority(priority: String) {
@@ -116,11 +98,15 @@ class TaskViewModel : ViewModel() {
             .build()
         datePicker.show(requireFragmentManager, "tag")
         datePicker.addOnPositiveButtonClickListener {
-            if (sdf.format(it) < sdf.format( Calendar.getInstance().time)) {
-                Toast.makeText(context,context.getString(R.string.enter_valid_date), Toast.LENGTH_LONG).show()
-            }else {
-            setDate(it)
-            convertToTimeMillis(it)
+            if (sdf.format(it) < sdf.format(Calendar.getInstance().time)) {
+                Toast.makeText(
+                    context,
+                    context.getString(R.string.enter_valid_date),
+                    Toast.LENGTH_LONG
+                ).show()
+            } else {
+                setDate(it)
+                convertToTimeMillis(it)
             }
         }
     }

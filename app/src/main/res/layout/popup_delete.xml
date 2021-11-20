@@ -46,14 +46,12 @@
                 android:text="Cancel"
                 android:layout_marginEnd="20dp"
                 android:id="@+id/cancel_btn"
-                android:onClick="@{()-> taskDetailsFragment.cancelDeleteTask()}"
                 />
             <com.google.android.material.button.MaterialButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Delete"
                 android:id="@+id/delete_btn"
-                android:onClick="@{()-> taskDetailsFragment.deleteTask()}"
                 />
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

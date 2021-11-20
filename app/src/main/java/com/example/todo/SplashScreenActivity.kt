@@ -4,8 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
-import androidx.core.graphics.alpha
-import com.example.todo.R.id
+
 
 class SplashScreenActivity : AppCompatActivity() {
     val splashScreenTime: Long = 3000

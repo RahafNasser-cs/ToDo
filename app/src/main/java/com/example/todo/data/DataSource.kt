@@ -1,7 +1,6 @@
 package com.example.todo.data
 
 import android.util.Log
-import com.example.todo.R
 import com.example.todo.model.Task
 
 class DataSource {
@@ -10,23 +9,26 @@ class DataSource {
     fun loadTask(): List<Task> {
         return listOfTasks
     }
+
     fun loadFilterTaskPriority(filterTag: String = ""): List<Task> {
         if (filterTag.isEmpty()) {
-            return  listOfTasks
-        }else {
+            return listOfTasks
+        } else {
             return listOfTasks.filter { it.priority == filterTag }
         }
     }
+
     fun loadFilterTaskDate(filterTag: String = ""): List<Task> {
-         if (filterTag.isEmpty()) { //filter based on creation date
-           return loadTask()
+        if (filterTag.isEmpty()) { //filter based on creation date
+            return loadTask()
         } else { //filter based on deadline
             var listDatesort = listOfTasks
             listDatesort.sortBy { it.date }
             Log.d("loadFilterTaskDate", "${listDatesort}")
-           return listDatesort
+            return listDatesort
         }
     }
+
     fun loadFilterTaskDeadline(): List<Task> {
         var listDatesort = listOfTasks
         listDatesort.sortBy { it.date }
@@ -46,7 +48,7 @@ class DataSource {
     }
 
     fun deleteTask(id: Int) {
-        var index=listOfTasks.indexOfFirst { it.id==id }
+        var index = listOfTasks.indexOfFirst { it.id == id }
         listOfTasks.removeAt(index)
     }
 
@@ -59,7 +61,7 @@ class DataSource {
         creationDate: String,
         id: Int
     ) {
-        var index=listOfTasks.indexOfFirst { it.id==id }
+        var index = listOfTasks.indexOfFirst { it.id == id }
         listOfTasks[index].title = title
         listOfTasks[index].date = date
         listOfTasks[index].subtask = subtask

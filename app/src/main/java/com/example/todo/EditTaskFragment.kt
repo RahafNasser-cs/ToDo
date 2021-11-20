@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,7 +28,8 @@ class EditTaskFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //To set fragment title
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.editTaskFragment)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.editTaskFragment)
         binding?.apply {
             lifecycleOwner = viewLifecycleOwner
             viewModel = sharedViewModel
@@ -58,24 +58,33 @@ class EditTaskFragment : Fragment() {
                 sharedViewModel.creationDate.value.toString()
             )
             sharedViewModel.testing()
-            Toast.makeText(requireContext(), getString(R.string.changing_saved), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.changing_saved), Toast.LENGTH_SHORT)
+                .show()
             findNavController().navigate(action)
         }
     }
+
     fun TaskContentIsValid(): Boolean {
         return if (!titleIsValid()) {
-            Toast.makeText(requireContext(), getString(R.string.validate_name), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_name), Toast.LENGTH_SHORT)
+                .show()
             false
         } else if (!dateIsValid()) {
-            Toast.makeText(requireContext(), getString(R.string.validate_day), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_day), Toast.LENGTH_SHORT)
+                .show()
             false
         } else if (!subtaskIsValid()) {
-            Toast.makeText(requireContext(), getString(R.string.validate_subtask), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.validate_subtask),
+                Toast.LENGTH_SHORT
+            ).show()
             false
         } else {
             true
         }
     }
+
     fun titleIsValid(): Boolean {
         return binding!!.taskTitleEditText.text.toString() != "" && binding!!.taskTitleEditText.text.toString().length <= 20
     }
