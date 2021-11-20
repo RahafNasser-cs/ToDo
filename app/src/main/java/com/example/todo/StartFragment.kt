@@ -15,6 +15,8 @@ import com.example.todo.model.Task
 import com.example.todo.model.TaskViewModel
 
 class StartFragment : Fragment() {
+
+
     private var binding: FragmentStartBinding? = null
     private val sharedViewModel: TaskViewModel by activityViewModels()
     lateinit var taskTitle: String
@@ -45,7 +47,6 @@ class StartFragment : Fragment() {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         return binding!!.root
     }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //To set fragment title
@@ -64,10 +65,6 @@ class StartFragment : Fragment() {
         sharedViewModel.testing()
     }
 
-//    override fun onAttach(context: Context) {
-//        super.onAttach(context)
-//        activity?.title = "Rahaf"
-//    }
     override fun onDestroy() {
         super.onDestroy()
         binding = null
@@ -90,7 +87,7 @@ class StartFragment : Fragment() {
         binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
     }
     fun filterTaskDate(filterTag: String = "") {
-        listOfFilteredTask = sharedViewModel.dataset.loadFilterTaskDate(filterTag)
+        listOfFilteredTask = sharedViewModel.dataset.loadFilterTaskDeadline()
         binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
     }
     fun filteredTask(filterTag: String) {
@@ -118,11 +115,11 @@ class StartFragment : Fragment() {
                 filterTaskPriority()
             }
             R.id.deadline_filter -> {
-                filterTaskDate("deadline")
-            }
-            R.id.creation_date -> {
                 filterTaskDate()
             }
+//            R.id.creation_date -> {
+//                filterTaskDate()
+//            }
 
         }
         return true

@@ -27,6 +27,12 @@ class DataSource {
            return listDatesort
         }
     }
+    fun loadFilterTaskDeadline(): List<Task> {
+        var listDatesort = listOfTasks
+        listDatesort.sortBy { it.date }
+        Log.d("loadFilterTaskDate", "${listDatesort}")
+        return listDatesort
+    }
 
     fun addTask(
         title: String,

@@ -5,13 +5,6 @@
     <string name="newTaskFragment">New Task</string>
     <string name="editTaskFragment">Edit Task</string>
     <string name="taskDetailsFragment">Task Details</string>
-
-
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
-    <string name="task_title1">Workout</string>
-
-    <string name="task_subtask1">Push up 20</string>
     <string name="task_title">Task Title</string>
     <string name="date_creation">Date creation</string>
     <string name="deadline">Deadline</string>
@@ -22,4 +15,26 @@
     <string name="title">Title</string>
     <string name="add_task">Add Task</string>
     <string name="today">TODAY</string>
+    <string name="compelet_status">Complete</string>
+    <string name="incomplete_status">Incomplete</string>
+    <string name="sort_by_priority">Sort by priority</string>
+    <string name="high_priority">High</string>
+    <string name="medium_priority">Medium</string>
+    <string name="low_priority">Low</string>
+    <string name="sort_by_time">Sort by time</string>
+    <string name="no_filter">No filter</string>
+    <string name="icon">icon</string>
+    <string name="delete_msg">Are you sure to delete this task?</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel_btn">Cancel</string>
+    <string name="delete_btn">Delete</string>
+    <string name="expired_dialog">Expired date!</string>
+    <string name="expired_date_msg">your task date has expired</string>
+    <string name="ok_btn">Ok</string>
+    <string name="task_deleted">Task deleted</string>
+    <string name="validate_name">Enter a valid title</string>
+    <string name="validate_day">Choose a date</string>
+    <string name="validate_subtask">Enter a subtask</string>
+    <string name="changing_saved">Changes saved</string>
+    <string name="enter_valid_date">Enter a valid date</string>
 </resources>

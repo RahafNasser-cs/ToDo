@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:title="icon"
+        android:title="@string/icon"
         android:id="@+id/filter_priority"
         android:icon="@drawable/ic_baseline_filter_list_24"
         app:showAsAction="always">
@@ -12,24 +12,24 @@
                 android:id="@+id/priority_options"
                 android:checkableBehavior="single">
                 <item
-                    android:title="Sort by priority"
+                    android:title="@string/sort_by_priority"
                     android:enabled="false"
                     android:checkable="false"
                     />
                 <item
-                    android:title="High"
+                    android:title="@string/high_priority"
                     android:id="@+id/high_priority"
                     android:icon="@drawable/high_priority_circle"
                     app:showAsAction="never"
                     />
                 <item
-                    android:title="Medium"
+                    android:title="@string/medium_priority"
                     android:id="@+id/medium_priority"
                     app:showAsAction="never"
                     android:icon="@drawable/medium_priority_circle"
                     />
                 <item
-                    android:title="Low"
+                    android:title="@string/low_priority"
                     android:id="@+id/low_priority"
                     app:showAsAction="never"
                     android:icon="@drawable/low_priority_circle"
@@ -39,25 +39,25 @@
                 android:id="@+id/date_options"
                 android:checkableBehavior="single">
                 <item
-                    android:title="Sort by time"
+                    android:title="@string/sort_by_time"
                     android:enabled="false"
                     android:checkable="false"
                     />
                 <item
                     android:id="@+id/deadline_filter"
-                    android:title="Deadline"
+                    android:title="@string/deadline"
                     android:icon="@drawable/ic_baseline_access_time_filled_24"
                     app:showAsAction="never"/>
-                <item
-                    android:id="@+id/creation_date"
-                    android:title="Creation Date"
-                    android:icon="@drawable/ic_baseline_access_time_filled_24"
-                    app:showAsAction="never"/>
+<!--                <item-->
+<!--                    android:id="@+id/creation_date"-->
+<!--                    android:title="@string/date_creation"-->
+<!--                    android:icon="@drawable/ic_baseline_access_time_filled_24"-->
+<!--                    app:showAsAction="never"/>-->
             </group>
             <group
                 android:id="@+id/no_filter_option">
                 <item
-                    android:title="No filter"
+                    android:title="@string/no_filter"
                     android:id="@+id/no_filter"
                     app:showAsAction="never"
                     />

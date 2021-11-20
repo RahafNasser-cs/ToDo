@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Done</string>
+    <string name="newTaskFragment">مهمة جديدة</string>
+    <string name="editTaskFragment">تعديل المهمة</string>
+    <string name="taskDetailsFragment">تفاصيل المهمة</string>
+    <string name="task_title">عنوان المهمة</string>
+    <string name="date_creation">تاريخ الإنشاء</string>
+    <string name="deadline">انتهاء المدة</string>
+    <string name="subtask">المهمة الفرعية</string>
+    <string name="priority">الأهمية</string>
+    <string name="task_state">حالة المهمة</string>
+    <string name="save">حفظ</string>
+    <string name="title">العنوان</string>
+    <string name="add_task">انشاء المهمة</string>
+    <string name="today">اليوم</string>
+    <string name="startFragment">Done</string>
+    <string name="compelet_status">مكتمل</string>
+    <string name="incomplete_status">غير مكتمل</string>
+    <string name="sort_by_priority">ترتيب حسب الأولوية</string>
+    <string name="high_priority">مهم</string>
+    <string name="medium_priority">متوسط الاهمية</string>
+    <string name="low_priority">غير مهم</string>
+    <string name="sort_by_time">ترتيب حسب الوقت</string>
+    <string name="no_filter">بدون فلتر</string>
+    <string name="icon">ايقونة</string>
+
+    <string name="delete_msg">هل انت متأكد من حذف المهمة</string>
+    <string name="confirm">تأكيد</string>
+    <string name="cancel_btn">إلغاء</string>
+    <string name="delete_btn">حذف</string>
+    <string name="expired_dialog">انتهت المدة!</string>
+    <string name="expired_date_msg">انتهى تاريخ المهمة</string>
+    <string name="ok_btn">حسنا</string>
+    <string name="task_deleted">تم حذف المهمة</string>
+    <string name="validate_name">ادخل عنوان صحيح</string>
+    <string name="validate_day">اختر تاريخ</string>
+    <string name="validate_subtask">ادخل مهمة فرعية</string>
+    <string name="changing_saved">تم حفظ التغييرات</string>
+    <string name="enter_valid_date">اختر تاريخ صحيح</string>
+
+</resources>
