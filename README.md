@@ -3,7 +3,7 @@
 
 
 
-## About Application
+## About Done
 > Done is a task management app to help you stay organized and manage 
 your day-to-day. You can use "Done" to make shopping lists or task lists, 
 take notes, plan an event. Done makes it easy to stay organized and manage your life
