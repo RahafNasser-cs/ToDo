@@ -15,6 +15,12 @@
 
         <!-- To Change menu icon -->
 
+        <item name="cardViewStyle">@style/MyStyle.Cardview.Orange</item>
 
     </style>
+    <style name="MyStyle" parent="Theme.AppCompat">
+        <item name="cardViewStyle">@style/MyStyle.Cardview.Orange</item>
+    </style>
+
+
 </resources>

@@ -34,11 +34,6 @@
                     app:showAsAction="never"
                     android:icon="@drawable/low_priority_circle"
                     />
-                <item
-                    android:title="No filter"
-                    android:id="@+id/no_filter"
-                    app:showAsAction="never"
-                    />
             </group>
             <group
                 android:id="@+id/date_options"
@@ -51,13 +46,21 @@
                 <item
                     android:id="@+id/deadline_filter"
                     android:title="Deadline"
-                    android:icon="@drawable/ic_baseline_access_time_24"
+                    android:icon="@drawable/ic_baseline_access_time_filled_24"
                     app:showAsAction="never"/>
                 <item
                     android:id="@+id/creation_date"
                     android:title="Creation Date"
-                    android:icon="@drawable/ic_baseline_access_time_24"
+                    android:icon="@drawable/ic_baseline_access_time_filled_24"
                     app:showAsAction="never"/>
+            </group>
+            <group
+                android:id="@+id/no_filter_option">
+                <item
+                    android:title="No filter"
+                    android:id="@+id/no_filter"
+                    app:showAsAction="never"
+                    />
             </group>
         </menu>
     </item>
