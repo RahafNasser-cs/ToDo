@@ -25,4 +25,10 @@
     <style name="Theme.Transparent" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowFullscreen">true</item>
     </style>
+
+    <!-- CardView -->
+    <style name="MyStyle.Cardview.Orange" parent="CardView">
+        <item name="cardBackgroundColor">@color/white_dark</item>
+        <item name="backgroundTint">@color/white_dark</item>
+    </style>
 </resources>

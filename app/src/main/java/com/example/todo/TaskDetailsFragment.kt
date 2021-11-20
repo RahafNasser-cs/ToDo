@@ -107,10 +107,10 @@ class TaskDetailsFragment : Fragment() {
 
     fun dialogConfirmDeleteTask() {
         MaterialAlertDialogBuilder(requireContext())
-            .setTitle("Confirm")
-            .setMessage("Are you sure to delete this task?")
-            .setNegativeButton("Cancel") { _, _ -> }
-            .setPositiveButton("Delete") { _, _ ->
+            .setTitle(getString(R.string.confirm))
+            .setMessage(getString(R.string.delete_msg))
+            .setNegativeButton(getString(R.string.cancel_btn)) { _, _ -> }
+            .setPositiveButton(getString(R.string.delete_btn)) { _, _ ->
                 deleteTask()
             }.show()
     }
@@ -147,7 +147,7 @@ class TaskDetailsFragment : Fragment() {
     fun deleteTask() {
         sharedViewModel.deleteTaskFromTypeTask()
         findNavController().navigate(R.id.action_taskDetailsFragment_to_startFragment)
-        Toast.makeText(requireContext(), "Task deleted", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), getString(R.string.task_deleted), Toast.LENGTH_SHORT).show()
     }
 
     fun taskIsExpiredDate() {
@@ -157,16 +157,16 @@ class TaskDetailsFragment : Fragment() {
             ).format(Calendar.getInstance().time).toString()
         ) {
             MaterialAlertDialogBuilder(requireContext())
-                .setTitle("Expired date!")
-                .setMessage("your task date has expired")
-                .setPositiveButton("Ok") { _, _ -> }.show()
+                .setTitle(getString(R.string.expired_dialog))
+                .setMessage(getString(R.string.expired_date_msg))
+                .setPositiveButton(getString(R.string.ok_btn)) { _, _ -> }.show()
         }
     }
 
     fun editTask() {
         sharedViewModel.testing()
         findNavController().navigate(R.id.action_taskDetailsFragment_to_editTaskFragment)
-        Toast.makeText(requireContext(), "Edit task", Toast.LENGTH_SHORT).show()
+        Toast.makeText(requireContext(), requireContext().getString(R.string.editTaskFragment), Toast.LENGTH_SHORT).show()
     }
 
     fun subtaskChecked() {

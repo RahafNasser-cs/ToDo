@@ -2,32 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-
     <item
-        android:title="filter_date_icon"
-        android:icon="@drawable/ic_baseline_access_time_24"
-        app:showAsAction="always"
-        android:id="@+id/filter_time_icon">
-        <menu>
-            <group
-                android:id="@+id/date_options"
-                android:checkableBehavior="single">
-                <item
-                    android:id="@+id/deadline_filter"
-                    android:title="Deadline"
-                    app:showAsAction="never"/>
-                <item
-                    android:id="@+id/creation_date"
-                    android:title="Creation Date"
-                    app:showAsAction="never"/>
-            </group>
-        </menu>
-
-    </item>
-
-
-    <item
-        android:title="icon"
+        android:title="@string/icon"
         android:id="@+id/filter_priority"
         android:icon="@drawable/ic_baseline_filter_list_24"
         app:showAsAction="always">
@@ -36,25 +12,52 @@
                 android:id="@+id/priority_options"
                 android:checkableBehavior="single">
                 <item
-                    android:title="High"
+                    android:title="@string/sort_by_priority"
+                    android:enabled="false"
+                    android:checkable="false"
+                    />
+                <item
+                    android:title="@string/high_priority"
                     android:id="@+id/high_priority"
                     android:icon="@drawable/high_priority_circle"
                     app:showAsAction="never"
                     />
                 <item
-                    android:title="Medium"
+                    android:title="@string/medium_priority"
                     android:id="@+id/medium_priority"
                     app:showAsAction="never"
                     android:icon="@drawable/medium_priority_circle"
                     />
                 <item
-                    android:title="Low"
+                    android:title="@string/low_priority"
                     android:id="@+id/low_priority"
                     app:showAsAction="never"
                     android:icon="@drawable/low_priority_circle"
                     />
+            </group>
+            <group
+                android:id="@+id/date_options"
+                android:checkableBehavior="single">
                 <item
-                    android:title="No filter"
+                    android:title="@string/sort_by_time"
+                    android:enabled="false"
+                    android:checkable="false"
+                    />
+                <item
+                    android:id="@+id/deadline_filter"
+                    android:title="@string/deadline"
+                    android:icon="@drawable/ic_baseline_access_time_filled_24"
+                    app:showAsAction="never"/>
+<!--                <item-->
+<!--                    android:id="@+id/creation_date"-->
+<!--                    android:title="@string/date_creation"-->
+<!--                    android:icon="@drawable/ic_baseline_access_time_filled_24"-->
+<!--                    app:showAsAction="never"/>-->
+            </group>
+            <group
+                android:id="@+id/no_filter_option">
+                <item
+                    android:title="@string/no_filter"
                     android:id="@+id/no_filter"
                     app:showAsAction="never"
                     />

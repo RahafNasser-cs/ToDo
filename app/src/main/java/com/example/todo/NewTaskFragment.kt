@@ -57,13 +57,13 @@ class NewTaskFragment : Fragment() {
 
     fun TaskContentIsValid(): Boolean {
         return if (!titleIsValid()) {
-            Toast.makeText(requireContext(), "Enter a valid title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_name), Toast.LENGTH_SHORT).show()
             false
         } else if (!dateIsValid()) {
-            Toast.makeText(requireContext(), "Choose a date", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_day), Toast.LENGTH_SHORT).show()
             false
         } else if (!subtaskIsValid()) {
-            Toast.makeText(requireContext(), "Enter a subtask", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_subtask), Toast.LENGTH_SHORT).show()
             false
         } else {
             true

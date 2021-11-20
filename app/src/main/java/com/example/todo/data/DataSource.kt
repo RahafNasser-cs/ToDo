@@ -18,14 +18,20 @@ class DataSource {
         }
     }
     fun loadFilterTaskDate(filterTag: String = ""): List<Task> {
-        return if (filterTag.isEmpty()) { //filter based on creation date
-            listOfTasks
+         if (filterTag.isEmpty()) { //filter based on creation date
+           return loadTask()
         } else { //filter based on deadline
             var listDatesort = listOfTasks
             listDatesort.sortBy { it.date }
             Log.d("loadFilterTaskDate", "${listDatesort}")
-            listDatesort
+           return listDatesort
         }
+    }
+    fun loadFilterTaskDeadline(): List<Task> {
+        var listDatesort = listOfTasks
+        listDatesort.sortBy { it.date }
+        Log.d("loadFilterTaskDate", "${listDatesort}")
+        return listDatesort
     }
 
     fun addTask(

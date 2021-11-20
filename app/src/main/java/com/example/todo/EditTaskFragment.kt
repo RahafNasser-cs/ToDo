@@ -58,19 +58,19 @@ class EditTaskFragment : Fragment() {
                 sharedViewModel.creationDate.value.toString()
             )
             sharedViewModel.testing()
-            Toast.makeText(requireContext(), "Changes saved", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.changing_saved), Toast.LENGTH_SHORT).show()
             findNavController().navigate(action)
         }
     }
     fun TaskContentIsValid(): Boolean {
         return if (!titleIsValid()) {
-            Toast.makeText(requireContext(), "Enter a valid title", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_name), Toast.LENGTH_SHORT).show()
             false
         } else if (!dateIsValid()) {
-            Toast.makeText(requireContext(), "Choose a date", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_day), Toast.LENGTH_SHORT).show()
             false
         } else if (!subtaskIsValid()) {
-            Toast.makeText(requireContext(), "Enter a subtask", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_subtask), Toast.LENGTH_SHORT).show()
             false
         } else {
             true
