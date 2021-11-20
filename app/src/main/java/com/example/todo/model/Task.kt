@@ -1,6 +1,7 @@
 package com.example.todo.model
 
-var currentId=0
+var currentId = 0
+
 data class Task(
     var title: String,
     var date: String,
@@ -8,5 +9,5 @@ data class Task(
     var priority: String,
     var taskStatus: String,
     var creationDate: String,
-    var id: Int= currentId++
+    var id: Int = currentId++
 )

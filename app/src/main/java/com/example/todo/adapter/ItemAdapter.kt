@@ -38,7 +38,8 @@ class ItemAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val adapterLayout = LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
+        val adapterLayout =
+            LayoutInflater.from(parent.context).inflate(R.layout.list_item, parent, false)
         return ItemViewHolder(adapterLayout)
     }
 
@@ -49,35 +50,37 @@ class ItemAdapter(
             val date = dataset[position].date
             val subtask = dataset[position].subtask
             val taskStatus = dataset[position].taskStatus
-            val priority = when(dataset[position].priority) {
-                "High"-> {
+            val priority = when (dataset[position].priority) {
+                "High" -> {
                     R.color.priority_high
                 }
-                "Medium"-> {
+                "Medium" -> {
                     R.color.priority_medium
                 }
-                else-> {
+                else -> {
                     R.color.priority_low
                 }
             }
 
             if (taskStatus == "Complete") {
-                Log.d("In Adapter (if--> complete)","taskstatus $taskStatus")
+                Log.d("In Adapter (if--> complete)", "taskstatus $taskStatus")
                 val ss = SpannableString(title)
                 val strikeThrowSpan = StrikethroughSpan()
-                ss.setSpan(strikeThrowSpan,0, title.length-1,Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+                ss.setSpan(strikeThrowSpan, 0, title.length - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 holder.titleTask.text = ss
-            }else {
-                Log.d("In Adapter (else--> incomplete)","taskstatus $taskStatus")
+            } else {
+                Log.d("In Adapter (else--> incomplete)", "taskstatus $taskStatus")
                 holder.titleTask.text = title
             }
             holder.taskDate.text = date
             holder.priorityBtn.setBackgroundColor(context.resources.getColor(priority))
-            holder.taskCard.setOnClickListener{
+            holder.taskCard.setOnClickListener {
                 Log.d("on click card", "title = $title")
                 Log.d("on click card", date)
-                val action = StartFragmentDirections.actionStartFragmentToTaskDetailsFragment(title,date,subtask,
-                    dataset[position].priority,taskStatus, dataset[position].creationDate)
+                val action = StartFragmentDirections.actionStartFragmentToTaskDetailsFragment(
+                    title, date, subtask,
+                    dataset[position].priority, taskStatus, dataset[position].creationDate
+                )
                 holder.view.findNavController().navigate(action)
             }
         }

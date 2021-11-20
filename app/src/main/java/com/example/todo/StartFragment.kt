@@ -1,10 +1,8 @@
 package com.example.todo
 
-import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import android.view.*
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
@@ -39,6 +37,7 @@ class StartFragment : Fragment() {
             taskCreationDate = it.getString(TaskDetailsFragment.CREATIONDATE).toString()
         }
     }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -47,6 +46,7 @@ class StartFragment : Fragment() {
         binding = FragmentStartBinding.inflate(inflater, container, false)
         return binding!!.root
     }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         //To set fragment title
@@ -73,35 +73,38 @@ class StartFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         if (sharedViewModel.dataset.loadTask().isNotEmpty()) {
-            binding?.recyclerView?.adapter = ItemAdapter(sharedViewModel.dataset.loadTask(), requireContext())
+            binding?.recyclerView?.adapter =
+                ItemAdapter(sharedViewModel.dataset.loadTask(), requireContext())
         }
         binding?.recyclerView?.setHasFixedSize(true)
     }
+
     fun goToNextFragment() {
         sharedViewModel.restart()
         findNavController().navigate(R.id.action_startFragment_to_newTaskFragment)
     }
-    fun filterTaskPriority(filterTag: String="") {
-        Log.d("filterTaskPriority()", "flage = ${sharedViewModel.dataset.loadFilterTaskPriority(filterTag)}")
-        listOfFilteredTask=sharedViewModel.dataset.loadFilterTaskPriority(filterTag)
-        binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
+
+    fun filterTaskPriority(filterTag: String = "") {
+        Log.d(
+            "filterTaskPriority()",
+            "flage = ${sharedViewModel.dataset.loadFilterTaskPriority(filterTag)}"
+        )
+        listOfFilteredTask = sharedViewModel.dataset.loadFilterTaskPriority(filterTag)
+        binding?.recyclerView?.adapter = ItemAdapter(listOfFilteredTask, this.requireContext())
     }
+
     fun filterTaskDate(filterTag: String = "") {
         listOfFilteredTask = sharedViewModel.dataset.loadFilterTaskDeadline()
-        binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
+        binding?.recyclerView?.adapter = ItemAdapter(listOfFilteredTask, this.requireContext())
     }
-    fun filteredTask(filterTag: String) {
-        Log.d("filteredTask()", "flage = ${sharedViewModel.dataset.loadFilterTaskPriority("High")}")
-        listOfFilteredTask=sharedViewModel.dataset.loadFilterTaskPriority(filterTag)
-        binding?.recyclerView?.adapter=ItemAdapter(listOfFilteredTask,this.requireContext())
-    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.menu_item, menu)
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.high_priority -> {
                 filterTaskPriority("High")
             }

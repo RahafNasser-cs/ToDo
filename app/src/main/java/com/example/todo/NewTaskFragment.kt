@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -29,7 +28,8 @@ class NewTaskFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         //To set fragment title
-        (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.newTaskFragment)
+        (activity as AppCompatActivity).supportActionBar?.title =
+            getString(R.string.newTaskFragment)
         binding!!.apply {
             newTaskFragment = this@NewTaskFragment
             lifecycleOwner = viewLifecycleOwner
@@ -57,13 +57,19 @@ class NewTaskFragment : Fragment() {
 
     fun TaskContentIsValid(): Boolean {
         return if (!titleIsValid()) {
-            Toast.makeText(requireContext(), getString(R.string.validate_name), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_name), Toast.LENGTH_SHORT)
+                .show()
             false
         } else if (!dateIsValid()) {
-            Toast.makeText(requireContext(), getString(R.string.validate_day), Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), getString(R.string.validate_day), Toast.LENGTH_SHORT)
+                .show()
             false
         } else if (!subtaskIsValid()) {
-            Toast.makeText(requireContext(), getString(R.string.validate_subtask), Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                getString(R.string.validate_subtask),
+                Toast.LENGTH_SHORT
+            ).show()
             false
         } else {
             true
