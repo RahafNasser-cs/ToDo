@@ -64,9 +64,10 @@ class TaskViewModel : ViewModel() {
         priorityOptions.addAll(listOf(fragmentContext.getString(R.string.high_priority), fragmentContext.getString(
             R.string.medium_priority), fragmentContext.getString(
             R.string.low_priority)))
+        _priority.value = priorityOptions[0]
 
     }
-        _priority.value = priorityOptions[0]
+
     fun restart() {
         _priority.value = ""
         _date.value = ""
