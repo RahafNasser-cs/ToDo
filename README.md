@@ -10,10 +10,11 @@ take notes, plan an event. Done makes it easy to stay organized and manage your 
 Android app 
 
 ## Application Features 
-> Can add, edit and delete the task. 
-> Filter task by priority or deadline. 
-> Alert when the task time expires. 
-> Dark mode.
+- Can add, edit and delete the task. 
+- Filter task by priority or deadline. 
+- Alert when the task time expires. 
+- Dark mode.
+- Arabic language.
 
 ## Application Graphical Interfaces
 #### Home page
@@ -46,6 +47,10 @@ Android app
 
 ### Dark mode
 ![Screenshot (103)](https://user-images.githubusercontent.com/92260346/142730676-080399dc-5fc0-4017-bf1f-fc2685f5a56b.png)
+
+### Arabic language
+![Screenshot (101)](https://user-images.githubusercontent.com/92260346/142770629-3e630279-0199-4cef-91f9-41d6ff14880c.png)
+
 
 
 
