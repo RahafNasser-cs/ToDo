@@ -84,7 +84,7 @@ class TaskDetailsFragment : Fragment() {
         binding!!.priorityContent.setBackgroundColor(
             resources.getColor(
                 sharedViewModel.backgroundTintColor(
-                    sharedViewModel.priority.value.toString()
+                    sharedViewModel.priority.value.toString(), requireContext()
                 )
             )
         )
@@ -183,7 +183,7 @@ class TaskDetailsFragment : Fragment() {
     }
     fun updateCheckBox() {
         Log.d("updateCheckBox","task status --> ${sharedViewModel.taskStatus.value.toString()} -- checktext --> ${binding!!.subtaskContent.isChecked} ---  isChecked --> ${sharedViewModel.isChecked.value.toString()}")
-        if (sharedViewModel.taskStatus.value.toString() == "Complete") {
+        if (sharedViewModel.taskStatus.value.toString() == context?.resources?.getString(R.string.compelet_status)) {
             binding!!.subtaskContent.isChecked = true
             if (!sharedViewModel.isChecked.value!!) {
                 sharedViewModel.setIsCheck()

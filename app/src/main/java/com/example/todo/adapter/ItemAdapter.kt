@@ -49,11 +49,13 @@ class ItemAdapter(
             val date = dataset[position].date
             val subtask = dataset[position].subtask
             val taskStatus = dataset[position].taskStatus
+            Log.e("TAG", "onBindViewHolder: ${dataset[position].priority}", )
+            Log.e("TAG", "R.s: ${context.resources.getString( R.string.high_priority)}", )
             val priority = when(dataset[position].priority) {
-                "High"-> {
+                context.resources.getString(R.string.high_priority)-> {
                     R.color.priority_high
                 }
-                "Medium"-> {
+                context.resources.getString(R.string.medium_priority)-> {
                     R.color.priority_medium
                 }
                 else-> {
@@ -61,7 +63,7 @@ class ItemAdapter(
                 }
             }
 
-            if (taskStatus == "Complete") {
+            if (taskStatus == context.resources.getString(R.string.compelet_status)) {
                 Log.d("In Adapter (if--> complete)","taskstatus $taskStatus")
                 val ss = SpannableString(title)
                 val strikeThrowSpan = StrikethroughSpan()
