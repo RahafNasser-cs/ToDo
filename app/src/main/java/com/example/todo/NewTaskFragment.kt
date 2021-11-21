@@ -16,7 +16,11 @@ import java.util.*
 class NewTaskFragment : Fragment() {
     private var binding: FragmentNewTaskBinding? = null
     private val sharedViewModel: TaskViewModel by activityViewModels()
-
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        sharedViewModel.getContextForTaskStatus(requireContext())
+        sharedViewModel.getContextForTaskPriority(requireContext())
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,

@@ -42,8 +42,8 @@ class TaskViewModel : ViewModel() {
 
     private var _today = MutableLiveData<String>()
     val today: MutableLiveData<String> get() = _today
-    val priorityOptions = listOf("High", "Medium", "Low")
-    var completionOptions = listOf("Complete", "Incomplete")
+    val priorityOptions = mutableListOf<String>()
+    var completionOptions = mutableListOf<String>()
     val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
     private var numberOfTaskChecked = 0
 
@@ -55,12 +55,24 @@ class TaskViewModel : ViewModel() {
         restart()
     }
 
-    fun restart() {
+    fun getContextForTaskStatus(fragmentContext: Context){
+        completionOptions.addAll(listOf(fragmentContext.getString(R.string.compelet_status), fragmentContext.getString(
+            R.string.incomplete_status)))
+        _taskStatus.value = completionOptions[1]
+    }
+    fun getContextForTaskPriority(fragmentContext: Context){
+        priorityOptions.addAll(listOf(fragmentContext.getString(R.string.high_priority), fragmentContext.getString(
+            R.string.medium_priority), fragmentContext.getString(
+            R.string.low_priority)))
+
+    }
         _priority.value = priorityOptions[0]
+    fun restart() {
+        _priority.value = ""
         _date.value = ""
         _subTask.value = ""
         _title.value = ""
-        _taskStatus.value = completionOptions[1]
+        _taskStatus.value = ""
         _today.value = currentDayMonthForAppTitle()
         _isChecked.value = false
     }
@@ -157,12 +169,12 @@ class TaskViewModel : ViewModel() {
     }
 
     //To set priority color
-    fun backgroundTintColor(priority: String): Int {
+    fun backgroundTintColor(priority: String, context: Context): Int {
         return when (priority) {
-            "High" -> {
+            context.resources.getString(R.string.high_priority) -> {
                 R.color.priority_high
             }
-            "Medium" -> {
+            context.resources.getString(R.string.medium_priority) -> {
                 R.color.priority_medium
             }
             else -> {
