@@ -14,7 +14,6 @@ import com.example.todo.model.TaskViewModel
 
 class StartFragment : Fragment() {
 
-
     private var binding: FragmentStartBinding? = null
     private val sharedViewModel: TaskViewModel by activityViewModels()
     lateinit var taskTitle: String
@@ -49,7 +48,7 @@ class StartFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        //To set fragment title
+        // To set fragment title
         (activity as AppCompatActivity).supportActionBar?.title = getString(R.string.startFragment)
         sharedViewModel.title.value = taskTitle
         sharedViewModel.date.value = taskDate
@@ -102,7 +101,6 @@ class StartFragment : Fragment() {
         inflater.inflate(R.menu.menu_item, menu)
     }
 
-
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.high_priority -> {
@@ -123,7 +121,6 @@ class StartFragment : Fragment() {
 //            R.id.creation_date -> {
 //                filterTaskDate()
 //            }
-
         }
         return true
     }

@@ -50,22 +50,35 @@ class TaskViewModel : ViewModel() {
     var dataset = DataSource()
     private var index = -1
 
-
     init {
         restart()
     }
 
-    fun getContextForTaskStatus(fragmentContext: Context){
-        completionOptions.addAll(listOf(fragmentContext.getString(R.string.compelet_status), fragmentContext.getString(
-            R.string.incomplete_status)))
+    fun getContextForTaskStatus(fragmentContext: Context) {
+        completionOptions.addAll(
+            listOf(
+                fragmentContext.getString(R.string.compelet_status),
+                fragmentContext.getString(
+                    R.string.incomplete_status
+                )
+            )
+        )
         _taskStatus.value = completionOptions[1]
     }
-    fun getContextForTaskPriority(fragmentContext: Context){
-        priorityOptions.addAll(listOf(fragmentContext.getString(R.string.high_priority), fragmentContext.getString(
-            R.string.medium_priority), fragmentContext.getString(
-            R.string.low_priority)))
-        _priority.value = priorityOptions[0]
 
+    fun getContextForTaskPriority(fragmentContext: Context) {
+        priorityOptions.addAll(
+            listOf(
+                fragmentContext.getString(R.string.high_priority),
+                fragmentContext.getString(
+                    R.string.medium_priority
+                ),
+                fragmentContext.getString(
+                    R.string.low_priority
+                )
+            )
+        )
+        _priority.value = priorityOptions[0]
     }
 
     fun restart() {
@@ -82,7 +95,6 @@ class TaskViewModel : ViewModel() {
         val date = Date(Timestamp(dateLong).time)
         _date.value = sdf.format(date).toString()
         Log.d("setDate", _date.value!!)
-
     }
 
     fun convertToTimeMillis(date: Long) {
@@ -166,10 +178,10 @@ class TaskViewModel : ViewModel() {
     }
 
     fun testing() {
-        Log.d("dataset-->", "${dataset}")
+        Log.d("dataset-->", "$dataset")
     }
 
-    //To set priority color
+    // To set priority color
     fun backgroundTintColor(priority: String, context: Context): Int {
         return when (priority) {
             context.resources.getString(R.string.high_priority) -> {
@@ -184,7 +196,7 @@ class TaskViewModel : ViewModel() {
         }
     }
 
-    //To count number of subtask is checked
+    // To count number of subtask is checked
     fun numberOfSubtaskChecked() {
 //        numberOfTaskChecked++
         _isChecked.value = !isChecked.value!!
@@ -194,8 +206,6 @@ class TaskViewModel : ViewModel() {
         } else {
             _taskStatus.value = completionOptions[1]
             dataset.listOfTasks[index].taskStatus = completionOptions[1]
-
         }
     }
-
 }

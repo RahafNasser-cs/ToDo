@@ -2,7 +2,6 @@ package com.example.todo.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.graphics.Paint
 import android.text.SpannableString
 import android.text.Spanned
 import android.text.style.StrikethroughSpan
@@ -10,19 +9,13 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.widget.AppCompatButton
-import androidx.appcompat.widget.AppCompatImageButton
 import androidx.cardview.widget.CardView
-import androidx.core.content.res.ResourcesCompat
-import androidx.core.graphics.drawable.toDrawable
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo.R
 import com.example.todo.StartFragmentDirections
-import com.example.todo.data.*
 import com.example.todo.model.Task
 
 class ItemAdapter(
@@ -34,7 +27,6 @@ class ItemAdapter(
         var priorityBtn: AppCompatButton = view.findViewById(R.id.priority_color)
         var taskCard: CardView = view.findViewById(R.id.task_card)
         var taskDate: TextView = view.findViewById(R.id.task_date_textview)
-
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
@@ -50,13 +42,13 @@ class ItemAdapter(
             val date = dataset[position].date
             val subtask = dataset[position].subtask
             val taskStatus = dataset[position].taskStatus
-            Log.e("TAG", "onBindViewHolder: ${dataset[position].priority}", )
-            Log.e("TAG", "R.s: ${context.resources.getString( R.string.high_priority)}", )
-            val priority = when(dataset[position].priority) {
-                context.resources.getString(R.string.high_priority)-> {
+            Log.e("TAG", "onBindViewHolder: ${dataset[position].priority}")
+            Log.e("TAG", "R.s: ${context.resources.getString(R.string.high_priority)}")
+            val priority = when (dataset[position].priority) {
+                context.resources.getString(R.string.high_priority) -> {
                     R.color.priority_high
                 }
-                context.resources.getString(R.string.medium_priority)-> {
+                context.resources.getString(R.string.medium_priority) -> {
                     R.color.priority_medium
                 }
                 else -> {
@@ -65,7 +57,7 @@ class ItemAdapter(
             }
 
             if (taskStatus == context.resources.getString(R.string.compelet_status)) {
-                Log.d("In Adapter (if--> complete)","taskstatus $taskStatus")
+                Log.d("In Adapter (if--> complete)", "taskstatus $taskStatus")
                 val ss = SpannableString(title)
                 val strikeThrowSpan = StrikethroughSpan()
                 ss.setSpan(strikeThrowSpan, 0, title.length - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
