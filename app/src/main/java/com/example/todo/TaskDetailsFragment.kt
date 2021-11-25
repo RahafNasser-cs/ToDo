@@ -2,7 +2,6 @@ package com.example.todo
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +9,7 @@ import android.widget.PopupWindow
 import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todo.databinding.FragmentTaskDetailsBinding
@@ -63,7 +63,7 @@ class TaskDetailsFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        //To set fragment title
+        // To set fragment title
         (activity as AppCompatActivity).supportActionBar?.title =
             getString(R.string.taskDetailsFragment)
         binding!!.apply {
@@ -92,7 +92,6 @@ class TaskDetailsFragment : Fragment() {
         super.onResume()
         updateCheckBox()
     }
-
 
     override fun onDestroy() {
         super.onDestroy()
@@ -143,30 +142,19 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun subtaskChecked() {
-        Log.d(
-            "before if else ",
-            "before shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}"
-        )
         if (sharedViewModel.isChecked.value!!) {
             sharedViewModel.numberOfSubtaskChecked()
             binding!!.subtaskContent.isChecked = false
-            Log.d(
-                "if true-->",
-                " shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}"
-            )
         } else {
             sharedViewModel.numberOfSubtaskChecked()
             binding!!.subtaskContent.isChecked = true
-            Log.d(
-                "else (false) -->",
-                "before shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}"
-            )
         }
     }
 
     fun updateCheckBox() {
-        Log.d("updateCheckBox","task status --> ${sharedViewModel.taskStatus.value.toString()} -- checktext --> ${binding!!.subtaskContent.isChecked} ---  isChecked --> ${sharedViewModel.isChecked.value.toString()}")
-        if (sharedViewModel.taskStatus.value.toString() == context?.resources?.getString(R.string.compelet_status)) {
+        if (sharedViewModel.taskStatus.value.toString()
+            == context?.resources?.getString(R.string.compelet_status)
+        ) {
             binding!!.subtaskContent.isChecked = true
             if (!sharedViewModel.isChecked.value!!) {
                 sharedViewModel.setIsCheck()
@@ -174,12 +162,7 @@ class TaskDetailsFragment : Fragment() {
         } else {
             binding!!.subtaskContent.isChecked = false
         }
-        Log.d(
-            "updateCheckBox",
-            "task status --> ${sharedViewModel.taskStatus.value.toString()} -- checktext --> ${binding!!.subtaskContent.isChecked}  ---  isChecked --> ${sharedViewModel.isChecked.value.toString()}"
-        )
     }
-
 
     companion object {
         const val TITLE = "title"
