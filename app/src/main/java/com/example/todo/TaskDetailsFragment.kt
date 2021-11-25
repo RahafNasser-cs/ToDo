@@ -142,33 +142,19 @@ class TaskDetailsFragment : Fragment() {
     }
 
     fun subtaskChecked() {
-        Log.d(
-            "before if else ",
-            "before shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}"
-        )
         if (sharedViewModel.isChecked.value!!) {
             sharedViewModel.numberOfSubtaskChecked()
             binding!!.subtaskContent.isChecked = false
-            Log.d(
-                "if true-->",
-                " shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}"
-            )
         } else {
             sharedViewModel.numberOfSubtaskChecked()
             binding!!.subtaskContent.isChecked = true
-            Log.d(
-                "else (false) -->",
-                "before shared = ${sharedViewModel.isChecked.value!!} -- checktext = ${binding!!.subtaskContent.isChecked}"
-            )
         }
     }
 
     fun updateCheckBox() {
-        Log.d(
-            "updateCheckBox",
-            "task status --> ${sharedViewModel.taskStatus.value} -- checktext --> ${binding!!.subtaskContent.isChecked} ---  isChecked --> ${sharedViewModel.isChecked.value}"
-        )
-        if (sharedViewModel.taskStatus.value.toString() == context?.resources?.getString(R.string.compelet_status)) {
+        if (sharedViewModel.taskStatus.value.toString()
+            == context?.resources?.getString(R.string.compelet_status)
+        ) {
             binding!!.subtaskContent.isChecked = true
             if (!sharedViewModel.isChecked.value!!) {
                 sharedViewModel.setIsCheck()
@@ -176,10 +162,6 @@ class TaskDetailsFragment : Fragment() {
         } else {
             binding!!.subtaskContent.isChecked = false
         }
-        Log.d(
-            "updateCheckBox",
-            "task status --> ${sharedViewModel.taskStatus.value} -- checktext --> ${binding!!.subtaskContent.isChecked}  ---  isChecked --> ${sharedViewModel.isChecked.value}"
-        )
     }
 
     companion object {

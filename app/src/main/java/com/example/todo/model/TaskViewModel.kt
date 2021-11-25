@@ -45,7 +45,6 @@ class TaskViewModel : ViewModel() {
     val priorityOptions = mutableListOf<String>()
     var completionOptions = mutableListOf<String>()
     val sdf = SimpleDateFormat("dd-MM-yyy", Locale.UK)
-    private var numberOfTaskChecked = 0
 
     var dataset = DataSource()
     private var index = -1
@@ -94,13 +93,11 @@ class TaskViewModel : ViewModel() {
     fun setDate(dateLong: Long) {
         val date = Date(Timestamp(dateLong).time)
         _date.value = sdf.format(date).toString()
-        Log.d("setDate", _date.value!!)
     }
 
     fun convertToTimeMillis(date: Long) {
-        var sdf = SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS")
-        Log.d("setDate milisec", sdf.format(date))
-        _dateTimeMillis = sdf.format(date)
+        var sdf = SimpleDateFormat("yyyy-MM-dd")
+        _dateTimeMillis = sdf.format(date) + SimpleDateFormat("HH:mm:ss.SSS").format(Date())
     }
 
     fun setIsCheck() {
@@ -109,7 +106,6 @@ class TaskViewModel : ViewModel() {
 
     fun setPriority(priority: String) {
         _priority.value = priority
-        Log.d("setPriority", _priority.value!!)
     }
 
     fun setTaskStatusComplete(taskStatus: String) {
@@ -139,7 +135,6 @@ class TaskViewModel : ViewModel() {
     fun taskCreationDate() {
         val date = Calendar.getInstance().time
         _creationDate.value = sdf.format(date).toString()
-        Log.d("taskCreationDate", _creationDate.value!!)
     }
 
     fun currentDayMonthForAppTitle(): String {
@@ -198,7 +193,6 @@ class TaskViewModel : ViewModel() {
 
     // To count number of subtask is checked
     fun numberOfSubtaskChecked() {
-//        numberOfTaskChecked++
         _isChecked.value = !isChecked.value!!
         if (_isChecked.value!!) {
             _taskStatus.value = completionOptions[0]
